@@ -1,8 +1,12 @@
-package Model;
+package br.edu.unipampa.appavaliacoes.Model;
+
+import java.io.Serializable;
+
+import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 
 public class Avaliacao implements Serializable {
 
-	private int id
+	private int id;
 	private String nome;
 	private String descricao;
 	private String dataDaAvaliacao;
@@ -10,12 +14,11 @@ public class Avaliacao implements Serializable {
 	private Notificacao notificacao;
 
 	public Avaliacao() {
-		this.nome("");
-		this.descricao("");
-		this.dataDaAvaliacao("");
-        this.horaAvaliacao = "00:00";
-		this.notificacao(new Notificacao());
-		this.nootificacao().add(this);
+		this.nome = "";
+		this.descricao = "";
+		this.dataDaAvaliacao = "";
+		this.horaDaAvaliacao = "00:00";
+		this.notificacao = new Notificacao();
 	}
 
 	public boolean isValida() {
@@ -25,7 +28,7 @@ public class Avaliacao implements Serializable {
 	}
 
     //Organiza as avaliações
-    public static void sort(List<Avaliacao> listaAvaliacoes) {
+    /*public static void sort(List<Avaliacao> listaAvaliacoes) {
         Collections.sort(listaAvaliacoes, new Comparator<Avaliacao>() {
             @Override
             public int compare(Avaliacao o1, Avaliacao o2) {
@@ -46,7 +49,7 @@ public class Avaliacao implements Serializable {
                     }
                 }
             }
-        });
+        });*/
 
 	public int getId() {
 		return id;
@@ -94,7 +97,6 @@ public class Avaliacao implements Serializable {
 
 	public void setNotificacao(Notificacao notificacao) {
 		this.notificacao = notificacao;
-		notificacao.add(this);
 	}
 
 }

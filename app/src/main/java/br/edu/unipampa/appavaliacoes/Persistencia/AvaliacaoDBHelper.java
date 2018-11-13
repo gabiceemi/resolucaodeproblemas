@@ -1,4 +1,4 @@
-package Model.Controller.Persistencia;
+package br.edu.unipampa.appavaliacoes.Persistencia;
 
 public class AvaliacaoDBHelper {
 
