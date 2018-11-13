@@ -1,17 +1,14 @@
-package Service;
+package br.edu.unipampa.appavaliacoes.Service;
 
-public class NotificacaoService {
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
 
-	public void agendarProximo() {
+public class NotificacaoService  extends BroadcastReceiver {
 
+	@Override
+	public void onReceive(Context context, Intent intent) {
+		Toast.makeText(context, "Você tem uma avaliação!!", Toast.LENGTH_LONG).show();
 	}
-
-	public void removerAtual() {
-
-	}
-
-	public void acionarProximo() {
-
-	}
-
 }
