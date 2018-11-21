@@ -12,34 +12,27 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Controller.MainActivity">
 
+        </activity>
 
+        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
 
         <activity android:name=".Service.NotificationReceiver">
 
-
         </activity>
+
         <activity android:name=".Controller.TipoNotificacao">
 
         </activity>
 
-        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
-
-        </activity>
-
         <activity android:name=".Controller.NotificationChannel">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
 
         </activity>
-
-        <receiver android:name=".Service.NotificationReceiver"></receiver>
 
     </application>
 
