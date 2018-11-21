@@ -81,12 +81,13 @@
             app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
         <TextView
-            android:id="@+id/viewDia"
+            android:id="@+id/viewData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:layout_marginTop="8dp"
             android:text="Dia"
+            android:clickable="true"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDt" />
@@ -98,6 +99,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:text="Hora"
+            android:clickable="true"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDt" />
@@ -110,7 +112,7 @@
             android:background="@color/colorDivider"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewDia" />
+            app:layout_constraintTop_toBottomOf="@+id/viewData" />
 
         <ImageView
             android:id="@+id/alarmView"
@@ -129,6 +131,7 @@
             android:layout_marginStart="70dp"
             android:layout_marginTop="17dp"
             android:text="Adicionar notificação"
+            android:clickable="true"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider2" />
