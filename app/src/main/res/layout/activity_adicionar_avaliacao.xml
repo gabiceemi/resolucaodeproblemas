@@ -10,12 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/cancelar"
             android:layout_width="15dp"
             android:layout_height="14dp"
             android:layout_marginStart="27dp"
             android:layout_marginTop="32dp"
+            android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/cancel" />
@@ -28,6 +29,7 @@
             android:layout_marginEnd="24dp"
             android:backgroundTint="@color/colorButton"
             android:text="Salvar"
+            android:clickable="true"
             android:textColor="@color/colorTextIcon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
