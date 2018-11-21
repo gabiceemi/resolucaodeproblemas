@@ -12,32 +12,42 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Controller.MainActivity">
 
-
-
-
         </activity>
 
         <activity android:name=".Service.NotificationReceiver">
 
-
         </activity>
         <activity android:name=".Controller.TipoNotificacao">
+<<<<<<< HEAD
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+=======
+>>>>>>> master
 
         </activity>
 
-        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
+        <activity android:name=".Controller.TipoNotificacao">
 
         </activity>
 
         <activity android:name=".Controller.NotificationChannel">
+<<<<<<< HEAD
+=======
+
+            
+        </activity>
+
+        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+>>>>>>> master
 
 
+<<<<<<< HEAD
 
 
 
@@ -46,9 +56,9 @@
         <activity android:name=".Controller.AdicionarAvaliacaoActivity">
 
 
+=======
+>>>>>>> master
         </activity>
-
-        <receiver android:name=".Service.NotificationReceiver"></receiver>
 
     </application>
 
