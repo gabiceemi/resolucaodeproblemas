@@ -16,6 +16,7 @@ public class TipoNotificacao extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tipo_notificacao);
+//        getSupportActionBar().setTitle("Tipo de Notificação");
 
         myLayout = (ConstraintLayout) findViewById(R.id.myLayout);
 
