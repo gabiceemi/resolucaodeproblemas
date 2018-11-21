@@ -22,6 +22,7 @@
 
         </activity>
         <activity android:name=".Controller.TipoNotificacao">
+<<<<<<< Updated upstream
 
         </activity>
 
@@ -30,6 +31,8 @@
         </activity>
 
         <activity android:name=".Controller.NotificationChannel">
+=======
+>>>>>>> Stashed changes
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,6 +40,14 @@
             </intent-filter>
 
 
+<<<<<<< Updated upstream
+=======
+
+        </activity>
+
+        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
+
+>>>>>>> Stashed changes
         </activity>
 
         <receiver android:name=".Service.NotificationReceiver"></receiver>
