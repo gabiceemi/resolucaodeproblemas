@@ -1,10 +1,10 @@
-package br.edu.unipampa.appavaliacoes;
+package br.edu.unipampa.appavaliacoes.Controller;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import br.edu.unipampa.appavaliacoes.Controller.MainActivity;
+import br.edu.unipampa.appavaliacoes.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
