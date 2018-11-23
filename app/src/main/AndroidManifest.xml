@@ -10,10 +10,10 @@
         android:roundIcon="@mipmap/ic"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.MainActivity"></activity>
-        <activity android:name=".Service.NotificationReceiver"></activity>
-        <activity android:name=".Controller.TipoNotificacao"></activity>
-        <activity android:name=".Controller.NotificationChannel"></activity>
+        <activity android:name=".Controller.MainActivity" />
+        <activity android:name=".Service.NotificationReceiver" />
+        <activity android:name=".Controller.TipoNotificacao" />
+        <activity android:name=".Controller.NotificationChannel" />
         <activity android:name=".Controller.AdicionarAvaliacaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controller.SplashScreenActivity"></activity>
+        <activity android:name=".Controller.SplashScreenActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
