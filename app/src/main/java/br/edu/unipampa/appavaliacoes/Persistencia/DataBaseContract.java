@@ -1,5 +1,7 @@
 package br.edu.unipampa.appavaliacoes.Persistencia;
 
+import android.provider.BaseColumns;
+
 public class DataBaseContract {
 
 	public static abstract class Avaliacao implements BaseColumns {
@@ -18,7 +20,6 @@ public class DataBaseContract {
 
     public static abstract class Notificacao implements BaseColumns {
         public static final String NOME_TABELA = "Notificacao";
-        public static final String COLUNA_TIPO = "tipo";
         public static final String COLUNA_DATA_NOTIFICACAO = "datanotificacao";
         public static final String COLUNA_HORARIO_NOTIFICACAO = "horarionotificacao";
         public static final String COLUNA_MENSAGEM = "mensagem";
