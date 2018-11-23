@@ -49,15 +49,15 @@ public class NotificationChannel extends AppCompatActivity {
 
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic)
+                .setSmallIcon(R.mipmap.ic)
                 .setContentTitle(title)
                 .setContentText(menssagem)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setVibrate(new long[]{150,300, 150,300})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .addAction(R.drawable.ic, "OK", actionIntent)
-                .addAction(R.drawable.delete,"ADIAR",actionIntent)
+                .addAction(R.mipmap.ic, "OK", actionIntent)
+                .addAction(R.mipmap.delete,"ADIAR",actionIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
                 .build();

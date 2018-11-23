@@ -5,61 +5,23 @@
     <application
         android:name=".Service.Channel"
         android:allowBackup="true"
-        android:icon="@drawable/ic"
+        android:icon="@mipmap/ic"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic"
+        android:roundIcon="@mipmap/ic"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.MainActivity">
-
-        </activity>
-
-        <activity android:name=".Service.NotificationReceiver">
-
-        </activity>
-        <activity android:name=".Controller.TipoNotificacao">
-<<<<<<< HEAD
+        <activity android:name=".Controller.MainActivity"></activity>
+        <activity android:name=".Service.NotificationReceiver"></activity>
+        <activity android:name=".Controller.TipoNotificacao"></activity>
+        <activity android:name=".Controller.NotificationChannel"></activity>
+        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-=======
->>>>>>> master
-
         </activity>
-
-        <activity android:name=".Controller.TipoNotificacao">
-
-        </activity>
-
-        <activity android:name=".Controller.NotificationChannel">
-<<<<<<< HEAD
-=======
-
-            
-        </activity>
-
-        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
->>>>>>> master
-
-
-<<<<<<< HEAD
-
-
-
-        </activity>
-
-        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
-
-
-=======
->>>>>>> master
-        </activity>
-
+        <activity android:name=".SplashScreenActivity"></activity>
     </application>
 
 </manifest>

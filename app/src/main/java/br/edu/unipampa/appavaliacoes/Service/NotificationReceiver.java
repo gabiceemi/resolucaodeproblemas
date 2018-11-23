@@ -16,6 +16,6 @@ public class NotificationReceiver extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_notificationafter);
 		NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		notificationManager.cancel(R.drawable.ic);
+		notificationManager.cancel(R.mipmap.ic);
 	}
 }
