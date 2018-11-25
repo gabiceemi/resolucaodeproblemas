@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import br.edu.unipampa.appavaliacoes.Persistencia.AvaliacaoDBHelper;
+import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public FloatingActionButton adicionar;
+    AvaliacaoDBHelper db;
+    DataBasePersistencia persistencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +23,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         adicionar = findViewById(R.id.adicionar);
         adicionar.setOnClickListener(this);
+        this.db = AvaliacaoDBHelper.getInstance(this);
+        this.db.getConexaoDataBase();
+        this.persistencia = DataBasePersistencia.getInstance(this);
+        this.persistencia.consultaBase();
 
     }
 

@@ -5,15 +5,19 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
+import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
 public class AdicionarAvaliacaoActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,13 +25,17 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
     public TextView data, horario, notificacao;
     private  int dia,mes,ano,hora,minutos;
     public Button salvar;
+    public EditText titulo, descricao;
     public ImageButton cancelar;
+    DataBasePersistencia dataBasePersistencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_avaliacao);
 
+        titulo = findViewById(R.id.titulo);
+        descricao = findViewById(R.id.descricao);
         data = findViewById(R.id.viewData);
         horario = findViewById(R.id.viewHora);
         notificacao = findViewById(R.id.textViewNotificacao);
@@ -38,6 +46,8 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
         data.setOnClickListener(this);
         horario.setOnClickListener(this);
         notificacao.setOnClickListener(this);
+
+        this.dataBasePersistencia = DataBasePersistencia.getInstance(this);
 
     }
 
@@ -75,6 +85,16 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             setContentView(R.layout.activity_tipo_notificacao);
         }
         if(v==salvar){
+            Avaliacao avaliacao = new Avaliacao();
+            String t = titulo.toString();
+            String d = descricao.toString();
+            String dt = data.toString();
+            String h = horario.toString();
+            avaliacao.setTitulo(t);
+            avaliacao.setDescricao(d);
+            avaliacao.setDataDaAvaliacao(dt);
+            avaliacao.setHoraDaAvaliacao(h);
+            dataBasePersistencia.insertAvaliacao(avaliacao);
 
         }
         if(v==cancelar){

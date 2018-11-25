@@ -9,6 +9,14 @@ public class AvaliacaoDBHelper extends SQLiteOpenHelper {
 
     private static final String BANCO_NOME = "avaliacoes.db";
     private static final int BANCO_VERSAO = 1;
+    public static AvaliacaoDBHelper instanciaDB;
+
+    public static synchronized AvaliacaoDBHelper getInstance(Context context) {
+        if (instanciaDB == null) {
+            instanciaDB = new AvaliacaoDBHelper(context.getApplicationContext());
+        }
+        return instanciaDB;
+    }
 
     public AvaliacaoDBHelper(Context context) {
         super(context, BANCO_NOME, null, BANCO_VERSAO);
@@ -44,8 +52,10 @@ public class AvaliacaoDBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_AVALIACAO);
         db.execSQL(SQL_CREATE_TABLE_TIPO_NOTIFICACAO);
         db.execSQL(SQL_CREATE_TABLE_NOTIFICACAO);
-        Log.d("Banco de Dados","Criando banco de dados.");
+    }
 
+    public SQLiteDatabase getConexaoDataBase(){
+        return this.getWritableDatabase();
     }
 
     @Override

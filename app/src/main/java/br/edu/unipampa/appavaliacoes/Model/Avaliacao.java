@@ -1,5 +1,8 @@
 package br.edu.unipampa.appavaliacoes.Model;
 
+import android.widget.EditText;
+import android.widget.TextView;
+
 import java.io.Serializable;
 
 import br.edu.unipampa.appavaliacoes.Model.Notificacao;
@@ -7,22 +10,21 @@ import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 public class Avaliacao implements Serializable {
 
 	private int id;
-	private String nome;
+	private String titulo;
 	private String descricao;
 	private String dataDaAvaliacao;
 	private String horaDaAvaliacao;
 	private Notificacao notificacao;
 
 	public Avaliacao() {
-		this.nome = "";
+		this.titulo = "";
 		this.descricao = "";
 		this.dataDaAvaliacao = "";
 		this.horaDaAvaliacao = "00:00";
-		this.notificacao = new Notificacao();
 	}
 
 	public boolean isValida() {
-        return !nome.isEmpty() && !dataDaAvaliacao.isEmpty() &&
+        return !titulo.isEmpty() && !dataDaAvaliacao.isEmpty() &&
                 !horaDaAvaliacao.isEmpty();
 
 	}
@@ -59,12 +61,12 @@ public class Avaliacao implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getTitulo() {
+		return titulo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
     public String getDescricao() {
