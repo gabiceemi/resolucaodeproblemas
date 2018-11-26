@@ -3,57 +3,50 @@ package br.edu.unipampa.appavaliacoes.Controller;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
-import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
-public class AdicionarAvaliacaoActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdiarNotificacao extends AppCompatActivity  implements View.OnClickListener{
+
 
     public TextView data, horario, notificacao;
     private  int dia,mes,ano,hora,minutos;
     public Button salvar;
-    public EditText titulo, descricao;
     public ImageButton cancelar;
-    DataBasePersistencia dataBasePersistencia;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adicionar_avaliacao);
+        setContentView(R.layout.activity_notificationafter);
 
-        titulo = findViewById(R.id.titulo);
-        descricao = findViewById(R.id.descricao);
-        data = findViewById(R.id.viewData);
-        horario = findViewById(R.id.viewHora);
-        notificacao = findViewById(R.id.notification);
-        salvar = findViewById(R.id.cancel);
-        cancelar = findViewById(R.id.cancelar);
+        data = findViewById(R.id.viewData_adiar);
+        horario = findViewById(R.id.viewHora_adiar);
+        notificacao = findViewById(R.id.notification_adiar);
+        salvar = findViewById(R.id.salvar_adiar);
+        cancelar = findViewById(R.id.cancelar_adiar);
         salvar.setOnClickListener(this);
         cancelar.setOnClickListener(this);
         data.setOnClickListener(this);
         horario.setOnClickListener(this);
         notificacao.setOnClickListener(this);
-
-        this.dataBasePersistencia = DataBasePersistencia.getInstance(this);
-
     }
 
     @Override
-    public void onClick(View v) {
-        if(v==data){
+    public void onClick(View view) {
+
+        if(view==data){
             final Calendar c= Calendar.getInstance();
             dia=c.get(Calendar.DAY_OF_MONTH);
             mes=c.get(Calendar.MONTH);
@@ -68,7 +61,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
                     ,dia,mes,ano);
             datePickerDialog.show();
         }
-        if (v==horario){
+        if (view==horario){
             final Calendar c= Calendar.getInstance();
             hora=c.get(Calendar.HOUR_OF_DAY);
             minutos=c.get(Calendar.MINUTE);
@@ -81,28 +74,21 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             },hora,minutos,false);
             timePickerDialog.show();
         }
-        if(v==notificacao){
+        if(view==notificacao){
             setContentView(R.layout.activity_tipo_notificacao);
         }
-        if(v==salvar){
-            Avaliacao avaliacao = new Avaliacao();
-            String t = titulo.toString();
-            String d = descricao.toString();
-            String dt = data.toString();
-            String h = horario.toString();
-            avaliacao.setTitulo(t);
-            avaliacao.setDescricao(d);
-            avaliacao.setDataDaAvaliacao(dt);
-            avaliacao.setHoraDaAvaliacao(h);
-            dataBasePersistencia.insertAvaliacao(avaliacao);
+        if(view==salvar){
 
         }
-        if(v==cancelar){
-            Intent intent = new Intent(AdicionarAvaliacaoActivity.this,
+        if(view==cancelar){
+            Intent intent = new Intent(AdiarNotificacao.this,
                     MainActivity.class);
             startActivity(intent);
             finish();
 
         }
     }
+        
+        
+    
 }

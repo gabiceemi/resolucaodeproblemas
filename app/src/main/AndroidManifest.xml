@@ -11,17 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Controller.MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Service.NotificationReceiver" />
         <activity android:name=".Controller.TipoNotificacao" />
         <activity android:name=".Controller.NotificationChannel" />
-        <activity android:name=".Controller.AdicionarAvaliacaoActivity"/>
+        <activity android:name=".Controller.AdicionarAvaliacaoActivity" />
 
     </application>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>

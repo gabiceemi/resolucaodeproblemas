@@ -22,7 +22,7 @@ public class NotificationChannel extends AppCompatActivity {
     private NotificationManagerCompat notifitionManager;
     private EditText text;
     private EditText msn;
-
+    private String tipoNotification;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +34,127 @@ public class NotificationChannel extends AppCompatActivity {
         msn = findViewById(R.id.message);
 
     }
+
+    public void notifica(View view){
+        /*
+        * Carregar o tipo de notificação que será execcultado
+        *
+        */
+
+        tipoNotification = "sonora";
+
+        if(tipoNotification == "sonora"){
+
+            notificationSound();
+
+        }else if (tipoNotification == "vibrate"){
+            notificationVibrate();
+
+
+        }else if (tipoNotification=="light"){
+
+            notificatinLight();
+        }
+
+
+    }
+
+
+
+
+    public void notificatinLight(){
+        String title = text.getText().toString();
+        String menssagem = msn.getText().toString();
+       /* Intent activityIntent = new Intent(this,Notification.class );
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent,0);*/
+
+
+        Intent intentNotification = new Intent (this, NotificationReceiver.class);
+        /*broadCastIntent.putExtra("tostMessage", menssagem);*/
+        PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
+
+
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.mipmap.ic)
+                .setContentTitle(title)
+                .setContentText(menssagem)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                .addAction(R.mipmap.ic, "OK", actionIntent)
+                .addAction(R.mipmap.delete,"ADIAR",actionIntent)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true)
+                .build();
+
+        notifitionManager.notify(1001,notification);
+    }
+
+
+
+
+    public void notificationVibrate(){
+        String title = text.getText().toString();
+        String menssagem = msn.getText().toString();
+        Intent intentNotification = new Intent (this, NotificationReceiver.class);
+
+        PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
+
+
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.mipmap.ic)
+                .setContentTitle(title)
+                .setContentText(menssagem)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setVibrate(new long[]{150,300, 150,300, 150, 300})
+                .addAction(R.mipmap.ic, "OK", actionIntent)
+                .addAction(R.mipmap.delete,"ADIAR",actionIntent)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true)
+                .build();
+
+        notifitionManager.notify(1002,notification);
+    }
+
+
+
+    public void notificationSound(){
+        String title = text.getText().toString();
+        String menssagem = msn.getText().toString();
+       /* Intent activityIntent = new Intent(this,Notification.class );
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent,0);*/
+
+
+        Intent intentNotification = new Intent (this, NotificationReceiver.class);
+        /*broadCastIntent.putExtra("tostMessage", menssagem);*/
+        PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
+
+
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.mipmap.ic)
+                .setContentTitle(title)
+                .setContentText(menssagem)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                .addAction(R.mipmap.ic, "OK", actionIntent)
+                .addAction(R.mipmap.delete,"ADIAR",actionIntent)
+                .setAutoCancel(true)
+                .setOnlyAlertOnce(true)
+                .build();
+
+        notifitionManager.notify(1003,notification);
+    }
+
+
+
+    /**
+     * Metodo basico para testes. Deve ser removido da versão final do projeto
+     */
 
     public void sendOnChannel(View view){
         String title = text.getText().toString();
@@ -64,4 +185,9 @@ public class NotificationChannel extends AppCompatActivity {
 
                notifitionManager.notify(1,notification);
     }
+
+
+
+
+
 }
