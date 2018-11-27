@@ -94,7 +94,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             avaliacao.setDescricao(d);
             avaliacao.setDataDaAvaliacao(dt);
             avaliacao.setHoraDaAvaliacao(h);
-            dataBasePersistencia.insertAvaliacao(avaliacao);
+
 
         }
         if(v==cancelar){

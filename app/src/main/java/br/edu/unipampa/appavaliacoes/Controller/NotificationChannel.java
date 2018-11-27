@@ -69,7 +69,7 @@ public class NotificationChannel extends AppCompatActivity {
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent,0);*/
 
 
-        Intent intentNotification = new Intent (this, NotificationReceiver.class);
+        Intent intentNotification = new Intent (this,AdiarNotificacao.class);
         /*broadCastIntent.putExtra("tostMessage", menssagem);*/
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
 
@@ -97,7 +97,7 @@ public class NotificationChannel extends AppCompatActivity {
     public void notificationVibrate(){
         String title = text.getText().toString();
         String menssagem = msn.getText().toString();
-        Intent intentNotification = new Intent (this, NotificationReceiver.class);
+        Intent intentNotification = new Intent (this, AdiarNotificacao.class);
 
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
 
@@ -128,7 +128,7 @@ public class NotificationChannel extends AppCompatActivity {
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent,0);*/
 
 
-        Intent intentNotification = new Intent (this, NotificationReceiver.class);
+        Intent intentNotification = new Intent (this, AdiarNotificacao.class);
         /*broadCastIntent.putExtra("tostMessage", menssagem);*/
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
 
@@ -163,7 +163,7 @@ public class NotificationChannel extends AppCompatActivity {
         PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent,0);*/
 
 
-        Intent intentNotification = new Intent (this, NotificationReceiver.class);
+        Intent intentNotification = new Intent (this, AdiarNotificacao.class);
         /*broadCastIntent.putExtra("tostMessage", menssagem);*/
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
 
@@ -178,7 +178,7 @@ public class NotificationChannel extends AppCompatActivity {
                 .setVibrate(new long[]{150,300, 150,300})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
                 .addAction(R.mipmap.ic, "OK", actionIntent)
-                .addAction(R.mipmap.delete,"ADIAR",actionIntent)
+                .addAction(R.mipmap.clock,"ADIAR",actionIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
                 .build();

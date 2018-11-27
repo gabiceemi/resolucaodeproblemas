@@ -16,11 +16,27 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+
         </activity>
         <activity android:name=".Service.NotificationReceiver" />
         <activity android:name=".Controller.TipoNotificacao" />
-        <activity android:name=".Controller.NotificationChannel" />
-        <activity android:name=".Controller.AdicionarAvaliacaoActivity" />
+        <activity android:name=".Controller.NotificationChannel">
+
+
+
+        </activity>
+        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
+        </activity>
+
+
+
+        <activity android:name=".Controller.AdiarNotificacao">
+
+
+
+
+        </activity>
 
     </application>
 

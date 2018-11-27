@@ -17,17 +17,17 @@ import java.util.Calendar;
 
 import br.edu.unipampa.appavaliacoes.R;
 
-public class AdiarNotificacao extends AppCompatActivity  implements View.OnClickListener{
+public class AdiarNotificacao extends AppCompatActivity implements View.OnClickListener {
 
 
     public TextView data, horario, notificacao;
-    private  int dia,mes,ano,hora,minutos;
+    private int dia, mes, ano, hora, minutos;
     public Button salvar;
     public ImageButton cancelar;
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificationafter);
 
@@ -46,41 +46,42 @@ public class AdiarNotificacao extends AppCompatActivity  implements View.OnClick
     @Override
     public void onClick(View view) {
 
-        if(view==data){
-            final Calendar c= Calendar.getInstance();
-            dia=c.get(Calendar.DAY_OF_MONTH);
-            mes=c.get(Calendar.MONTH);
-            ano=c.get(Calendar.YEAR);
+        if (view == data) {
+            final Calendar c = Calendar.getInstance();
+            dia = c.get(Calendar.DAY_OF_MONTH);
+            mes = c.get(Calendar.MONTH);
+            ano = c.get(Calendar.YEAR);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    data.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                    data.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                 }
             }
-                    ,dia,mes,ano);
+                    , dia, mes, ano);
+
             datePickerDialog.show();
         }
-        if (view==horario){
-            final Calendar c= Calendar.getInstance();
-            hora=c.get(Calendar.HOUR_OF_DAY);
-            minutos=c.get(Calendar.MINUTE);
+        if (view == horario) {
+            final Calendar c = Calendar.getInstance();
+            hora = c.get(Calendar.HOUR_OF_DAY);
+            minutos = c.get(Calendar.MINUTE);
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    horario.setText(hourOfDay+":"+minute);
+                    horario.setText(hourOfDay + ":" + minute);
                 }
-            },hora,minutos,false);
+            }, hora, minutos, false);
             timePickerDialog.show();
         }
-        if(view==notificacao){
+        if (view == notificacao) {
             setContentView(R.layout.activity_tipo_notificacao);
         }
-        if(view==salvar){
+        if (view == salvar) {
 
         }
-        if(view==cancelar){
+        if (view == cancelar) {
             Intent intent = new Intent(AdiarNotificacao.this,
                     MainActivity.class);
             startActivity(intent);
@@ -88,7 +89,6 @@ public class AdiarNotificacao extends AppCompatActivity  implements View.OnClick
 
         }
     }
-        
-        
-    
+
+
 }

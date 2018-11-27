@@ -1,5 +1,6 @@
 package br.edu.unipampa.appavaliacoes.Model;
 
+import android.app.Notification;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,6 +22,19 @@ public class Avaliacao implements Serializable {
 		this.descricao = "";
 		this.dataDaAvaliacao = "";
 		this.horaDaAvaliacao = "00:00";
+	}
+
+
+	public  Avaliacao(int id, String titulo, String descricao, String dataDaAvaliacao, String horaDaAvaliacao){
+
+		this.id= id;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.dataDaAvaliacao = dataDaAvaliacao;
+		this.horaDaAvaliacao = horaDaAvaliacao;
+		/** Notificação ainda por inserir*/
+
+
 	}
 
 	public boolean isValida() {
