@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.edu.unipampa.appavaliacoes">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".Service.Channel"
         android:allowBackup="true"
@@ -16,30 +18,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
         <activity android:name=".Service.NotificationReceiver" />
-        <activity android:name=".Controller.TipoNotificacao" />
-        <activity android:name=".Controller.NotificationChannel">
-
-
-
-        </activity>
-        <activity android:name=".Controller.AdicionarAvaliacaoActivity">
-        </activity>
-
-
-
-        <activity android:name=".Controller.AdiarNotificacao">
-
-
-
-
-        </activity>
-
+        <activity android:name=".Controller.NotificationChannel"></activity>
+        <activity android:name=".Controller.AdicionarAvaliacaoActivity"></activity>
+        <activity android:name=".Controller.AdiarNotificacao"></activity>
+        <activity android:name=".Controller.TipoNotificacao"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.VIBRATE" />
 
 </manifest>
