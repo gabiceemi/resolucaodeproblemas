@@ -27,9 +27,10 @@ public class DataBasePersistencia {
         avaliacaoHelper = new AvaliacaoDBHelper(context);
     }
 
-    public void insertAvaliacao (Avaliacao avaliacao){
+    public void insertAvaliacao(Avaliacao avaliacao) {
+        ;
 
-        db = avaliacaoHelper.getWritableDatabase();
+        db = avaliacaoHelper.getReadableDatabase();
 
         ContentValues values = new ContentValues();
 
@@ -71,6 +72,7 @@ public class DataBasePersistencia {
         db.close();
 
         return avaliacaos;
+
 
     }
 }

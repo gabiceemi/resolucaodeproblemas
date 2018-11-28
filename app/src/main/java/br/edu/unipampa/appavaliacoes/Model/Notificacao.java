@@ -31,7 +31,7 @@ public class Notificacao {
 	}
 
 	public boolean getTipoNotifi() {
-		return tipoNotifi;
+		return true;
 	}
 
 	public void setTipoNotifi(String tipoNotifi) {

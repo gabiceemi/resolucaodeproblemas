@@ -37,8 +37,8 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
         descricao = findViewById(R.id.descricao);
         data = findViewById(R.id.viewData);
         horario = findViewById(R.id.viewHora);
-        notificacao = findViewById(R.id.notification);
-        salvar = findViewById(R.id.adicionar);
+        notificacao = findViewById(R.id.textViewNotificacao);
+        salvar = findViewById(R.id.salvar);
         cancelar = findViewById(R.id.cancelar);
         salvar.setOnClickListener(this);
         cancelar.setOnClickListener(this);
@@ -93,7 +93,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             avaliacao.setDescricao(d);
             avaliacao.setDataDaAvaliacao(dt);
             avaliacao.setHoraDaAvaliacao(h);
-
+            dataBasePersistencia.insertAvaliacao(avaliacao);
 
         }
         if(v==cancelar){

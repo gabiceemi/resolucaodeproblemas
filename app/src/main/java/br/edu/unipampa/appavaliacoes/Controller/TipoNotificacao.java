@@ -13,7 +13,7 @@ import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
-public class TipoNotificacao extends AppCompatActivity {
+public class TipoNotificacao extends AppCompatActivity implements View.OnClickListener {
 
     public Button confirmar;
     public Button voltar;
@@ -33,6 +33,9 @@ public class TipoNotificacao extends AppCompatActivity {
         sonoro = findViewById(R.id.switch_sonoro);
         luminoso = findViewById(R.id.switch_luminoso);
         mensagem = findViewById(R.id.switch_mensagem);
+
+        confirmar.setOnClickListener(this);
+        voltar.setOnClickListener(this);
 
 
         this.dataBasePersistencia = DataBasePersistencia.getInstance(this);
@@ -55,8 +58,13 @@ public class TipoNotificacao extends AppCompatActivity {
             setContentView(R.layout.activity_adicionar_avaliacao);
         }
         if(v==voltar){
-            setContentView(R.layout.activity_adicionar_avaliacao);
+            Intent intent = new Intent(TipoNotificacao.this,
+                    AdicionarAvaliacaoActivity.class);
+            startActivity(intent);
+            finish();
+
         }
 
     }
+
 }

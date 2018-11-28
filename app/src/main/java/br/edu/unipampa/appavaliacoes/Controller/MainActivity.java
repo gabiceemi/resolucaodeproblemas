@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.db = AvaliacaoDBHelper.getInstance(this);
         this.db.getConexaoDataBase();
         this.persistencia = DataBasePersistencia.getInstance(this);
-        this.persistencia.consultaBase();
 
     }
 
