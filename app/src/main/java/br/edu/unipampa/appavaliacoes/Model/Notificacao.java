@@ -6,9 +6,8 @@ public class Notificacao {
 
 	private String data;
 	private String hora;
-	private boolean avisoSonoro;
-	private boolean avisoLuminoso;
-	private boolean avisoMensagem;
+	private String tipoNotifi;
+
 	private ArrayList<Notificacao> notificacoes;
 
 	public boolean isValida() {
@@ -31,27 +30,11 @@ public class Notificacao {
 		this.hora = hora;
 	}
 
-	public boolean isAvisoSonoro() {
-		return avisoSonoro;
+	public boolean getTipoNotifi() {
+		return tipoNotifi;
 	}
 
-	public void setAvisoSonoro(boolean avisoSonoro) {
-		this.avisoSonoro = avisoSonoro;
-	}
-
-	public boolean isAvisoLuminoso() {
-		return avisoLuminoso;
-	}
-
-	public void setAvisoLuminoso(boolean avisoLuminoso) {
-		this.avisoLuminoso = avisoLuminoso;
-	}
-
-	public boolean isAvisoMensagem() {
-		return avisoMensagem;
-	}
-
-	public void setAvisoMensagem(boolean avisoMensagem) {
-		this.avisoMensagem = avisoMensagem;
+	public void setTipoNotifi(String tipoNotifi) {
+		this.tipoNotifi = tipoNotifi;
 	}
 }
