@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -39,7 +38,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
         data = findViewById(R.id.viewData);
         horario = findViewById(R.id.viewHora);
         notificacao = findViewById(R.id.notification);
-        salvar = findViewById(R.id.cancel);
+        salvar = findViewById(R.id.adicionar);
         cancelar = findViewById(R.id.cancelar);
         salvar.setOnClickListener(this);
         cancelar.setOnClickListener(this);
