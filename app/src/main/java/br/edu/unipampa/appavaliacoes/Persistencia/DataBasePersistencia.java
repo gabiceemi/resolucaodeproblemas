@@ -38,7 +38,7 @@ public class DataBasePersistencia {
         values.put(DataBaseContract.Avaliacao.COLUNA_DATA, avaliacao.getDataDaAvaliacao());
         values.put(DataBaseContract.Avaliacao.COLUNA_HORARIO, avaliacao.getHoraDaAvaliacao());
 
-        long idavaliacao = db.insert(DataBaseContract.Avaliacao.NOME_TABELA, null, values);
+        db.insert(DataBaseContract.Avaliacao.NOME_TABELA, null, values);
 
         db.close();
 
