@@ -28,7 +28,6 @@ public class DataBasePersistencia {
     }
 
     public void insertAvaliacao(Avaliacao avaliacao) {
-        ;
 
         db = avaliacaoHelper.getReadableDatabase();
 
