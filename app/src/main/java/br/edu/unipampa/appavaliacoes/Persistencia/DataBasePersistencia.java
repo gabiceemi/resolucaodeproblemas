@@ -16,13 +16,6 @@ public class DataBasePersistencia {
 
     public static DataBasePersistencia instanciaRepositorio;
 
-    public static synchronized DataBasePersistencia getInstance(Context context) {
-        if (instanciaRepositorio == null) {
-            instanciaRepositorio = new DataBasePersistencia(context);
-        }
-        return instanciaRepositorio;
-    }
-
     public DataBasePersistencia(Context context) {
         avaliacaoHelper = new AvaliacaoDBHelper(context);
     }
@@ -42,6 +35,7 @@ public class DataBasePersistencia {
             long idAvaliacao = db.insert(DataBaseContract.Avaliacao.NOME_TABELA, null, values);
 
             avaliacao.setId(idAvaliacao);
+            System.out.print("deu certo");
             db.close();
         } catch (Exception e) {
             db.close();

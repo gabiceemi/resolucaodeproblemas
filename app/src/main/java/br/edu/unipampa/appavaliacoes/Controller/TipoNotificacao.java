@@ -21,7 +21,6 @@ public class TipoNotificacao extends AppCompatActivity implements View.OnClickLi
     public Switch luminoso;
     public Switch mensagem;
     public String tipo;
-    DataBasePersistencia dataBasePersistencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +35,6 @@ public class TipoNotificacao extends AppCompatActivity implements View.OnClickLi
 
         confirmar.setOnClickListener(this);
         voltar.setOnClickListener(this);
-
-
-        this.dataBasePersistencia = DataBasePersistencia.getInstance(this);
     }
 
     public void onClick(View v) {
