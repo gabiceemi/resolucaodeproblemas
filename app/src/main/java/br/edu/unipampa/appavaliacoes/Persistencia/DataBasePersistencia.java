@@ -29,19 +29,23 @@ public class DataBasePersistencia {
 
     public void insertAvaliacao(Avaliacao avaliacao) {
 
-        db = avaliacaoHelper.getReadableDatabase();
+        try {
+            db = avaliacaoHelper.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
+            ContentValues values = new ContentValues();
 
-        values.put(DataBaseContract.Avaliacao.COLUNA_TITULO, avaliacao.getTitulo());
-        values.put(DataBaseContract.Avaliacao.COLUNA_DESCRICAO, avaliacao.getDescricao());
-        values.put(DataBaseContract.Avaliacao.COLUNA_DATA, avaliacao.getDataDaAvaliacao());
-        values.put(DataBaseContract.Avaliacao.COLUNA_HORARIO, avaliacao.getHoraDaAvaliacao());
+            values.put(DataBaseContract.Avaliacao.COLUNA_TITULO, avaliacao.getTitulo());
+            values.put(DataBaseContract.Avaliacao.COLUNA_DESCRICAO, avaliacao.getDescricao());
+            values.put(DataBaseContract.Avaliacao.COLUNA_DATA, avaliacao.getDataDaAvaliacao());
+            values.put(DataBaseContract.Avaliacao.COLUNA_HORARIO, avaliacao.getHoraDaAvaliacao());
 
-        db.insert(DataBaseContract.Avaliacao.NOME_TABELA, null, values);
+            long idAvaliacao = db.insert(DataBaseContract.Avaliacao.NOME_TABELA, null, values);
 
-        db.close();
-
+            avaliacao.setId(idAvaliacao);
+            db.close();
+        } catch (Exception e) {
+            db.close();
+        }
     }
 
 

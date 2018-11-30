@@ -10,7 +10,7 @@ import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 
 public class Avaliacao implements Serializable {
 
-	private int id;
+	private long id;
 	private String titulo;
 	private String descricao;
 	private String dataDaAvaliacao;
@@ -67,11 +67,11 @@ public class Avaliacao implements Serializable {
             }
         });*/
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

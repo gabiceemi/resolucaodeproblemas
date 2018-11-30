@@ -26,27 +26,36 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
     public Button salvar;
     public EditText titulo, descricao;
     public ImageButton cancelar;
-    DataBasePersistencia dataBasePersistencia;
+    public DataBasePersistencia dataBasePersistencia;
+    public Avaliacao avaliacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_avaliacao);
 
-        titulo = findViewById(R.id.titulo);
-        descricao = findViewById(R.id.descricao);
-        data = findViewById(R.id.viewData);
-        horario = findViewById(R.id.viewHora);
+        avaliacao = new Avaliacao();
+        dataBasePersistencia = new DataBasePersistencia(this);
+        localizarCampos();
+
         notificacao = findViewById(R.id.textViewNotificacao);
         salvar = findViewById(R.id.salvar);
         cancelar = findViewById(R.id.cancelar);
+
         salvar.setOnClickListener(this);
         cancelar.setOnClickListener(this);
         data.setOnClickListener(this);
         horario.setOnClickListener(this);
         notificacao.setOnClickListener(this);
 
-        this.dataBasePersistencia = DataBasePersistencia.getInstance(this);
+    }
+
+    public void localizarCampos(){
+
+        titulo = findViewById(R.id.titulo);
+        descricao = findViewById(R.id.descricao);
+        data = findViewById(R.id.viewData);
+        horario = findViewById(R.id.viewHora);
 
     }
 
@@ -84,15 +93,11 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             setContentView(R.layout.activity_tipo_notificacao);
         }
         if(v==salvar){
-            Avaliacao avaliacao = new Avaliacao();
-            String t = titulo.getText().toString();
-            String d = descricao.getText().toString();
-            String dt = data.getText().toString();
-            String h = horario.getText().toString();
-            avaliacao.setTitulo(t);
-            avaliacao.setDescricao(d);
-            avaliacao.setDataDaAvaliacao(dt);
-            avaliacao.setHoraDaAvaliacao(h);
+
+            avaliacao.setTitulo(titulo.getText().toString());
+            avaliacao.setDescricao(descricao.getText().toString());
+            avaliacao.setDataDaAvaliacao(data.getText().toString());
+            avaliacao.setHoraDaAvaliacao(horario.getText().toString());
             dataBasePersistencia.insertAvaliacao(avaliacao);
 
         }
