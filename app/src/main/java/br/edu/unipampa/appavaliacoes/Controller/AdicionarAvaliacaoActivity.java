@@ -85,10 +85,10 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
         }
         if(v==salvar){
             Avaliacao avaliacao = new Avaliacao();
-            String t = titulo.toString();
-            String d = descricao.toString();
-            String dt = data.toString();
-            String h = horario.toString();
+            String t = titulo.getText().toString();
+            String d = descricao.getText().toString();
+            String dt = data.getText().toString();
+            String h = horario.getText().toString();
             avaliacao.setTitulo(t);
             avaliacao.setDescricao(d);
             avaliacao.setDataDaAvaliacao(dt);
