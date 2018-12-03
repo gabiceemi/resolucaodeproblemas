@@ -90,7 +90,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             timePickerDialog.show();
         }
         if(v==notificacao){
-            setContentView(R.layout.activity_tipo_notificacao);
+            startActivity(new Intent(AdicionarAvaliacaoActivity.this, TipoNotificacao.class));
         }
         if(v==salvar){
 

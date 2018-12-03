@@ -2,9 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Controller.TipoNotificacao">
+
+    <!--<android.support.constraint.ConstraintLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
 
     <Button
         android:id="@+id/btn_confirmar"
@@ -15,6 +20,8 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/buttonstyleithgradient"
         android:backgroundTint="@color/colorButton"
+        android:clickable="true"
+        android:onClick="eventClick"
         android:text="Confirmar"
         android:textColor="@color/colorTextIcon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +37,7 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/buttonstyleithgradient"
         android:backgroundTint="@color/colorButton"
+        android:onClick="eventClick"
         android:text="Voltar"
         android:textColor="@color/colorTextIcon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_confirmar" />
 
     <TextView
+
         android:id="@+id/textView"
         android:layout_width="342dp"
         android:layout_height="47dp"
@@ -91,4 +100,41 @@
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btnData"
+
+        android:layout_width="63dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="52dp"
+        android:clickable="true"
+        android:onClick="eventClick"
+        android:text="Dia"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/viewHora"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_voltar" />
+
+    <TextView
+        android:id="@+id/btnHora"
+
+        android:layout_width="64dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="48dp"
+        android:clickable="true"
+        android:onClick="eventClick"
+        android:text="Hora"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_voltar" />
+
+
+
 </android.support.constraint.ConstraintLayout>
