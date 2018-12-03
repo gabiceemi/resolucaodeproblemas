@@ -50,10 +50,10 @@ public class DataBasePersistencia {
 
         db = avaliacaoHelper.getReadableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id" +
-                " INNER JOIN  TipoNotificacao on TipoNotificacao._id = Notificacao.tiponotificacao", null);
+        //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id" +
+               // " INNER JOIN  TipoNotificacao on TipoNotificacao._id = Notificacao.tiponotificacao", null);
 
-       // Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
+       Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
         if (c.moveToFirst()){
             do {
 
