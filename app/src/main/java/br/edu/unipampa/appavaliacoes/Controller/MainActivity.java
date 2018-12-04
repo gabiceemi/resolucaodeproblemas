@@ -1,5 +1,6 @@
 package br.edu.unipampa.appavaliacoes.Controller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -28,7 +30,7 @@ import br.edu.unipampa.appavaliacoes.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public FloatingActionButton adicionar;
-    public ArrayList<Avaliacao> list = new ArrayList<>();
+    public List<Avaliacao> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lw.setAdapter(exibir);*/
 
         list = carregaAvaliacao();
-        AtividadeAdapter ap = new AtividadeAdapter(getApplicationContext(),R.layout.list_perso, list);
+        AtividadeAdapter ap = new AtividadeAdapter(list, this);
         lw.setAdapter(ap);
+
 
     }
 
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return atividades;
     }
 
-    public ArrayList<Avaliacao> carregaAvaliacao(){
+    public List<Avaliacao> carregaAvaliacao(){
 
         DataBasePersistencia db = new DataBasePersistencia(this);
         return db.consultaBase();
@@ -87,46 +90,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public class AtividadeAdapter extends ArrayAdapter{
+    public class AtividadeAdapter extends BaseAdapter{
 
 
-        private List<Avaliacao> listAvaliacao;
-        private int resource;
-        private LayoutInflater inflater;
+        private final List<Avaliacao> listAvaliacao;
+        private final Activity act;
 
-        public AtividadeAdapter(Context context, int resource, List<Avaliacao> objects) {
-            super(context, resource, objects);
-            listAvaliacao = objects;
-            this.resource = resource;
-            inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        public AtividadeAdapter(List<Avaliacao> objects, Activity act) {
+            this.listAvaliacao = objects;
+
+            this.act =act;
+               }
+
+        @Override
+        public int getCount() {
+            return listAvaliacao.size();
         }
 
 
+        @Override
+        public Object getItem(int position) {
+            return listAvaliacao.get(position);
+        }
+
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            View view = act.getLayoutInflater().inflate(R.layout.list_perso, parent, false);
 
-            if(convertView == null){
 
-                convertView = inflater.inflate(resource,null);
-
-            }
-
+            Avaliacao avaliacao = listAvaliacao.get(position);
             ImageView isbookicone;
             TextView  titulo;
             TextView data;
             TextView hora;
 
-            isbookicone = (ImageView) convertView.findViewById(R.id.isbookicone);
-            titulo = (TextView)convertView.findViewById(R.id.titulo);
-            data = (TextView)convertView.findViewById(R.id.data);
-            hora = (TextView)convertView.findViewById(R.id.hora);
+            isbookicone = (ImageView) view.findViewById(R.id.isbookicone);
+            titulo = (TextView)view.findViewById(R.id.titulo);
+            data = (TextView)view.findViewById(R.id.data);
+            hora = (TextView)view.findViewById(R.id.hora);
 
 
-            titulo.setText(listAvaliacao.get(position).getTitulo());
-            data.setText(listAvaliacao.get(position).getDataDaAvaliacao());
-            hora.setText(listAvaliacao.get(position).getHoraDaAvaliacao());
-            return convertView;
+            titulo.setText(avaliacao.getTitulo());
+            data.setText(avaliacao.getDataDaAvaliacao());
+            hora.setText(avaliacao.getHoraDaAvaliacao());
+            return view;
         }
     }
 
