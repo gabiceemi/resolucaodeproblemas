@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -20,10 +21,10 @@ import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
-public class TipoNotificacao extends AppCompatActivity {
+public class TipoNotificacao extends AppCompatActivity implements View.OnClickListener {
 
     public Button confirmar;
-    public Button voltar;
+    public ImageButton voltar;
     public String tipo;
     public Notificacao notificacao;
     public DataBasePersistencia dataBasePersistencia;
@@ -44,6 +45,7 @@ public class TipoNotificacao extends AppCompatActivity {
     public void localizarCampos() {
         confirmar = findViewById(R.id.btn_confirmar);
         voltar = findViewById(R.id.btn_voltar);
+        voltar.setOnClickListener(this);
         tipoNotificacao = findViewById(R.id.switch_sonoro);
         data = findViewById(R.id.btnData);
         horario = findViewById(R.id.btnHora);
@@ -99,11 +101,13 @@ public class TipoNotificacao extends AppCompatActivity {
 
                 setContentView(R.layout.activity_adicionar_avaliacao);
                 break;
-
-            case R.id.btn_voltar:
-                finish();
-                break;
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v==voltar){
+            finish();
+        }
+    }
 }

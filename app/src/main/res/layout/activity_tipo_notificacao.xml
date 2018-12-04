@@ -10,55 +10,44 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent">-->
 
+    <ImageButton
+        android:id="@+id/btn_voltar"
+        android:layout_width="15dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="42dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/cancel" />
 
     <Button
         android:id="@+id/btn_confirmar"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="117dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/buttonstyleithgradient"
         android:backgroundTint="@color/colorButton"
         android:clickable="true"
-        android:onClick="eventClick"
-        android:text="Confirmar"
+        android:text="Salvar"
         android:textColor="@color/colorTextIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_sonoro" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_voltar"
-        android:layout_width="220dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/buttonstyleithgradient"
-        android:backgroundTint="@color/colorButton"
-        android:onClick="eventClick"
-        android:text="Voltar"
-        android:textColor="@color/colorTextIcon"
+        android:text="Tipo de notificação:"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_confirmar" />
-
-    <TextView
-
-        android:id="@+id/textView"
-        android:layout_width="342dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="Escolha o tipo de notificação que deseja "
-        android:textColor="@color/colorAccent"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Switch
@@ -66,40 +55,38 @@
         android:layout_width="306dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Luminosa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Switch
         android:id="@+id/switch_mensagem"
         android:layout_width="306dp"
-        android:layout_height="36dp"
+        android:layout_height="32dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:text="Mensagem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_sonoro" />
 
     <Switch
         android:id="@+id/switch_sonoro"
         android:layout_width="306dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:checked="true"
         android:text="Sonoro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_luminoso" />
 
     <TextView
         android:id="@+id/btnData"
@@ -107,33 +94,29 @@
         android:layout_width="63dp"
         android:layout_height="41dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="52dp"
         android:clickable="true"
         android:onClick="eventClick"
         android:text="Dia"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/viewHora"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_voltar" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_mensagem" />
 
     <TextView
         android:id="@+id/btnHora"
 
         android:layout_width="64dp"
         android:layout_height="44dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="72dp"
-        android:layout_marginBottom="48dp"
         android:clickable="true"
         android:onClick="eventClick"
         android:text="Hora"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_voltar" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_mensagem" />
 
 
 

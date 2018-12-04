@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Controller.MainActivity">
+        <activity
+            android:name=".Controller.MainActivity"
+            android:label="AppAvaliações">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,10 +22,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Service.NotificationReceiver" />
-        <activity android:name=".Controller.NotificationChannel"></activity>
-        <activity android:name=".Controller.AdicionarAvaliacaoActivity"></activity>
-        <activity android:name=".Controller.AdiarNotificacao"></activity>
-        <activity android:name=".Controller.TipoNotificacao"></activity>
+        <activity android:name=".Controller.NotificationChannel" />
+        <activity
+            android:name=".Controller.AdicionarAvaliacaoActivity"
+            android:label="Adicionar Avaliação" />
+        <activity android:name=".Controller.AdiarNotificacao" />
+        <activity android:name=".Controller.TipoNotificacao"
+            android:label="Tipo de Notificação"/>
+        <activity android:name=".Controller.EditarAvaliacaoActivity"></activity>
     </application>
 
 </manifest>

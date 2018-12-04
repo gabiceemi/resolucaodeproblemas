@@ -6,16 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-
 import br.edu.unipampa.appavaliacoes.R;
-import br.edu.unipampa.appavaliacoes.Service.NotificationReceiver;
-
 import static br.edu.unipampa.appavaliacoes.Service.Channel.CHANNEL_1_ID;
 
 public class NotificationChannel extends AppCompatActivity {

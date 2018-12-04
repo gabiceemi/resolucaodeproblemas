@@ -1,6 +1,7 @@
 package br.edu.unipampa.appavaliacoes.Controller;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -102,9 +103,6 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
 
         }
         if(v==cancelar){
-            Intent intent = new Intent(AdicionarAvaliacaoActivity.this,
-                    MainActivity.class);
-            startActivity(intent);
             finish();
 
         }

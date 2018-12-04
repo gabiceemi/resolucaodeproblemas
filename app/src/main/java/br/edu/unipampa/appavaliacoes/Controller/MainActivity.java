@@ -2,17 +2,14 @@ package br.edu.unipampa.appavaliacoes.Controller;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-
-import br.edu.unipampa.appavaliacoes.Persistencia.AvaliacaoDBHelper;
-import br.edu.unipampa.appavaliacoes.Persistencia.DataBaseContract;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.R;
@@ -20,6 +17,9 @@ import br.edu.unipampa.appavaliacoes.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public FloatingActionButton adicionar;
+    private ArrayList<Avaliacao> avaliacoes;
+    private Bundle bundle;
+    private View rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adicionar = findViewById(R.id.adicionar);
         adicionar.setOnClickListener(this);
 
-
         ListView lw = (ListView) findViewById(R.id.listView);
         ArrayList<String> atividades = carregarLista();
         ArrayAdapter<String> exibir = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,atividades);
         lw.setAdapter(exibir);
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        apresentaAvaliacoes();
 
     }
 
@@ -48,13 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
-
         return atividades;
     }
-
-
-
-
 
     @Override
     public void onClick(View v) {
@@ -64,5 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
         }
+    }
+
+    public void apresentaAvaliacoes(){
+
     }
 }
