@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -95,6 +96,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         private final List<Avaliacao> listAvaliacao;
         private final Activity act;
+        private ImageButton edit;
+        private ImageButton delet;
+        private TextView tituloEdit;
+        private TextView viewDataEdit;
+        private TextView viewHoraEdit;
+        private TextView viewTextEdit;
+
+
 
 
         public AtividadeAdapter(List<Avaliacao> objects, Activity act) {
@@ -124,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = act.getLayoutInflater().inflate(R.layout.list_perso, parent, false);
 
-
             Avaliacao avaliacao = listAvaliacao.get(position);
             ImageView isbookicone;
             TextView  titulo;
@@ -135,6 +143,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             titulo = (TextView)view.findViewById(R.id.titulo);
             data = (TextView)view.findViewById(R.id.data);
             hora = (TextView)view.findViewById(R.id.hora);
+
+            /* Botões */
+
+            edit = (ImageButton) view.findViewById(R.id.btn_edit_list);
+            edit.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this,
+                            AdicionarAvaliacaoActivity.class);
+
+                            /*Implementar meio de passar os dados*/
+
+
+
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+
+            delet = (ImageButton) view.findViewById(R.id.btn_delet_list);
+
+            delet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Acao do segundo botao
+                }
+            });
 
 
             titulo.setText(avaliacao.getTitulo());

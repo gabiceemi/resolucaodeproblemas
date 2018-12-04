@@ -63,7 +63,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/btn_edit"
+                    android:id="@+id/btn_edit_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -71,7 +71,7 @@
                     app:srcCompat="@mipmap/edit" />
 
                 <ImageButton
-                    android:id="@+id/btn_delet"
+                    android:id="@+id/btn_delet_list"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
