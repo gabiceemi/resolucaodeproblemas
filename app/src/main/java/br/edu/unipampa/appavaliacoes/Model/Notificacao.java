@@ -8,6 +8,20 @@ public class Notificacao {
 	private String hora;
 	private String tipoNotifi;
 
+	public Notificacao() {
+		this.data = "";
+		this.hora = "00:00";
+		this.tipoNotifi = "";
+	}
+
+	public  Notificacao(String data, String hora, String tipoNotifi) {
+
+		this.data = data;
+		this.hora = hora;
+		this.tipoNotifi = tipoNotifi;
+	}
+
+
 	private ArrayList<Notificacao> notificacoes;
 
 	public boolean isValida() {
@@ -30,7 +44,7 @@ public class Notificacao {
 		this.hora = hora;
 	}
 
-	public boolean getTipoNotifi() {
+	public static boolean getTipoNotifi() {
 		return true;
 	}
 

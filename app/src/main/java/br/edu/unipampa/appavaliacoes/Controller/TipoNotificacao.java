@@ -88,18 +88,10 @@ public class TipoNotificacao extends AppCompatActivity implements View.OnClickLi
 
             case R.id.btn_confirmar:
 
-                String t = tipo.toString();
-                notificacao.setTipoNotifi(t);
+//                String t = tipo.toString();
+//                notificacao.setTipoNotifi(t);
 
-                Context contexto = getApplicationContext();
-                String texto = "tipo de notificação salva";
-                int duracao = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(contexto, texto, duracao);
-                toast.show();
-                Toast.makeText(getApplicationContext(), "tipo de notificação salva", Toast.LENGTH_SHORT).show();
-
-                setContentView(R.layout.activity_adicionar_avaliacao);
+              Toast.makeText(TipoNotificacao.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
+import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 
 public class DataBasePersistencia {
 
@@ -42,6 +43,27 @@ public class DataBasePersistencia {
         }
     }
 
+    public void insertTipoNotoficacao(DataBaseContract.TipoNotificacao tipoNotificacao) {
+
+        try {
+            db = avaliacaoHelper.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+
+
+            values.put(DataBaseContract.TipoNotificacao.COLUNA_TIPO, Notificacao.getTipoNotifi());
+
+
+            long idNotificacao = db.insert(DataBaseContract.TipoNotificacao.NOME_TABELA, null, values);
+
+//            tipoNotificacao.setId(idNotificacao);
+
+            db.close();
+        } catch (Exception e) {
+            db.close();
+        }
+    }
+
 
     public ArrayList<Avaliacao> consultaBase() {
 
@@ -53,20 +75,20 @@ public class DataBasePersistencia {
         Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id" +
                 " INNER JOIN  TipoNotificacao on TipoNotificacao._id = Notificacao.tiponotificacao", null);
 
-       // Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
-        if (c.moveToFirst()){
+        // Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
+        if (c.moveToFirst()) {
             do {
 
                 int idAvaliacao = c.getInt(0);
-                String tituloAvaliacao =c.getString(1);
+                String tituloAvaliacao = c.getString(1);
                 String descricaoAvaliacao = c.getString(2);
                 String dataAvaliacao = c.getString(3);
                 String horaAvaliacao = c.getString(4);
 
-                avaliacao = new Avaliacao(idAvaliacao,tituloAvaliacao,descricaoAvaliacao,dataAvaliacao,horaAvaliacao);
+                avaliacao = new Avaliacao(idAvaliacao, tituloAvaliacao, descricaoAvaliacao, dataAvaliacao, horaAvaliacao);
                 avaliacaos.add(avaliacao);
 
-            } while(c.moveToNext());
+            } while (c.moveToNext());
         }
         c.close();
         db.close();
