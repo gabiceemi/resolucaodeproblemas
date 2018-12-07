@@ -37,9 +37,6 @@ import br.edu.unipampa.appavaliacoes.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public FloatingActionButton adicionar;
-    private ArrayList<Avaliacao> avaliacoes;
-    private Bundle bundle;
-    private View rootView;
     public List<Avaliacao> list = new ArrayList<>();
 
     @Override
@@ -50,9 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adicionar.setOnClickListener(this);
 
         ListView lw = (ListView) findViewById(R.id.listView);
-       /* ArrayList<String> atividades = carregarLista();
-        ArrayAdapter<String> exibir = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,atividades);
-        lw.setAdapter(exibir);*/
 
         list = carregaAvaliacao();
         AtividadeAdapter ap = new AtividadeAdapter(list, this);
@@ -68,23 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private ArrayList<String> carregarLista(){
-        ArrayList<String> atividades = new ArrayList<>();
-        ArrayList<Avaliacao> listAva = new ArrayList<>();
-        DataBasePersistencia db = new DataBasePersistencia(this);
-        listAva = db.consultaBase();
-
-
-        for (int i =0; i<listAva.size();i++){
-            atividades.add(listAva.get(i).getTitulo());
-
-        }
-
-        return atividades;
-    }
-
     public List<Avaliacao> carregaAvaliacao(){
-
         DataBasePersistencia db = new DataBasePersistencia(this);
         return db.consultaBase();
 
@@ -106,15 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public class AtividadeAdapter extends BaseAdapter{
 
-
         private final List<Avaliacao> listAvaliacao;
         private final Activity act;
         private ImageView edit;
         private ImageView delet;
-        private TextView tituloEdit;
-        private TextView viewDataEdit;
-        private TextView viewHoraEdit;
-        private TextView viewTextEdit;
 
         public AtividadeAdapter(List<Avaliacao> objects, Activity act) {
             this.listAvaliacao = objects;
@@ -144,36 +117,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = act.getLayoutInflater().inflate(R.layout.activity_list_adapter_avalicoes, parent, false);
             Avaliacao avaliacao = listAvaliacao.get(position);
-            TextView  titulo;
-            TextView data;
-            TextView hora;
+            TextView  titulo = view.findViewById(R.id.tituloAvaliacao);
+            TextView data = view.findViewById(R.id.dataAvaliacao);
+            TextView hora = view.findViewById(R.id.horaAvaliacao);
 
-            titulo = (TextView)view.findViewById(R.id.tituloAvaliacao);
-            data = (TextView)view.findViewById(R.id.dataAvaliacao);
-            hora = (TextView)view.findViewById(R.id.horaAvaliacao);
-
-            /* Botões */
-
-            edit = (ImageView) view.findViewById(R.id.editar);
+            edit = view.findViewById(R.id.editar);
             edit.setOnClickListener(new View.OnClickListener(){
 
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MainActivity.this,
                             AdicionarAvaliacaoActivity.class);
-
-                            /*Implementar meio de passar os dados*/
-
-
-
                     startActivity(intent);
                     finish();
                 }
             });
 
-
             delet = (ImageView) view.findViewById(R.id.deletar);
-
             delet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -181,13 +141,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
 
+            data.setText(avaliacao.getDataDaAvaliacao());
+            hora.setText(avaliacao.getHoraDaAvaliacao());
             if(avaliacao.getTitulo().length() > 27) {
                 titulo.setText(avaliacao.getTitulo().substring(0, 27) + "...");
             } else {
                 titulo.setText(avaliacao.getTitulo());
             }
-            data.setText(avaliacao.getDataDaAvaliacao());
-            hora.setText(avaliacao.getHoraDaAvaliacao());
+
             return view;
         }
     }

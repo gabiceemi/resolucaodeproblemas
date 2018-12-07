@@ -29,7 +29,6 @@
         <activity android:name=".Controller.AdiarNotificacao" />
         <activity android:name=".Controller.TipoNotificacao"
             android:label="Tipo de Notificação"/>
-        <activity android:name=".Controller.EditarAvaliacaoActivity"></activity>
     </application>
 
 </manifest>
