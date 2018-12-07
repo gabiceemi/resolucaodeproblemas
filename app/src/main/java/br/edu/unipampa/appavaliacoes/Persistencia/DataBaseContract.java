@@ -13,7 +13,7 @@ public class DataBaseContract {
     }
 
     public static abstract class TipoNotificacao implements BaseColumns {
-        public static final String NOME_TABELA = "TipoNotificacao";
+        public static final String NOME_TABELA = "AdicionarNotificacaoActivity";
         public static final String COLUNA_TIPO = "tipo";
         
     }

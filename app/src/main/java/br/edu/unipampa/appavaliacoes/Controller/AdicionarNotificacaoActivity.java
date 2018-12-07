@@ -2,15 +2,12 @@ package br.edu.unipampa.appavaliacoes.Controller;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -21,7 +18,7 @@ import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
-public class TipoNotificacao extends AppCompatActivity implements View.OnClickListener {
+public class AdicionarNotificacaoActivity extends AppCompatActivity implements View.OnClickListener {
 
     public Button confirmar;
     public ImageButton voltar;
@@ -91,7 +88,7 @@ public class TipoNotificacao extends AppCompatActivity implements View.OnClickLi
 //                String t = tipo.toString();
 //                notificacao.setTipoNotifi(t);
 
-              Toast.makeText(TipoNotificacao.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
+              Toast.makeText(AdicionarNotificacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

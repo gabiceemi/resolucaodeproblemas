@@ -27,7 +27,7 @@
             android:name=".Controller.AdicionarAvaliacaoActivity"
             android:label="Adicionar Avaliação" />
         <activity android:name=".Controller.AdiarNotificacao" />
-        <activity android:name=".Controller.TipoNotificacao"
+        <activity android:name=".Controller.AdicionarNotificacaoActivity"
             android:label="Tipo de Notificação"/>
     </application>
 
