@@ -37,3 +37,8 @@
         android:scrollbars="vertical" />
 
 </RelativeLayout>
+        android:layout_height="432dp"
+        android:layout_marginTop="55dp"
+        android:scrollbars="vertical" />
+
+</android.support.design.widget.CoordinatorLayout>

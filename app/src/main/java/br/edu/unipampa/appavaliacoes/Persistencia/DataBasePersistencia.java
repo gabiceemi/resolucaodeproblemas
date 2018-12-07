@@ -72,11 +72,13 @@ public class DataBasePersistencia {
 
         db = avaliacaoHelper.getReadableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id" +
-                " INNER JOIN  TipoNotificacao on TipoNotificacao._id = Notificacao.tiponotificacao", null);
+        //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id" +
+               // " INNER JOIN  TipoNotificacao on TipoNotificacao._id = Notificacao.tiponotificacao", null);
 
         // Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
         if (c.moveToFirst()) {
+       Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
+        if (c.moveToFirst()){
             do {
 
                 int idAvaliacao = c.getInt(0);
@@ -97,4 +99,22 @@ public class DataBasePersistencia {
 
 
     }
+
+
+    public void deletAvaliacao(int idAvaliacao, int idNotiticacao){
+
+        db = avaliacaoHelper.getWritableDatabase();
+        db.delete("Notificacao", "Notificacao._id" + "='" + idNotiticacao + "'", null);
+        db.delete("Avaliacao", "Avaliacao._id" + "='" + idAvaliacao + "'", null);
+
+    }
+
+
+    public void updateAvaliacao(int idAvaliacao, int idNotiticacao){
+
+        db = avaliacaoHelper.getReadableDatabase();
+
+    }
+
+
 }
