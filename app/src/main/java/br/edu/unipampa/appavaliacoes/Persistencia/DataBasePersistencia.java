@@ -73,35 +73,37 @@ public class DataBasePersistencia {
         db = avaliacaoHelper.getReadableDatabase();
 
         //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id" +
-               // " INNER JOIN  TipoNotificacao on TipoNotificacao._id = Notificacao.tiponotificacao", null);
+        // " INNER JOIN  TipoNotificacao on TipoNotificacao._id = Notificacao.tiponotificacao", null);
 
-        // Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
+        Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
         if (c.moveToFirst()) {
-       Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
-        if (c.moveToFirst()){
-            do {
+            c = db.rawQuery("SELECT * FROM Avaliacao", null);
+            if (c.moveToFirst()) {
+                do {
 
-                int idAvaliacao = c.getInt(0);
-                String tituloAvaliacao = c.getString(1);
-                String descricaoAvaliacao = c.getString(2);
-                String dataAvaliacao = c.getString(3);
-                String horaAvaliacao = c.getString(4);
+                    int idAvaliacao = c.getInt(0);
+                    String tituloAvaliacao = c.getString(1);
+                    String descricaoAvaliacao = c.getString(2);
+                    String dataAvaliacao = c.getString(3);
+                    String horaAvaliacao = c.getString(4);
 
-                avaliacao = new Avaliacao(idAvaliacao, tituloAvaliacao, descricaoAvaliacao, dataAvaliacao, horaAvaliacao);
-                avaliacaos.add(avaliacao);
+                    avaliacao = new Avaliacao(idAvaliacao, tituloAvaliacao, descricaoAvaliacao, dataAvaliacao, horaAvaliacao);
+                    avaliacaos.add(avaliacao);
 
-            } while (c.moveToNext());
+                } while (c.moveToNext());
+            }
+            c.close();
+            db.close();
         }
-        c.close();
-        db.close();
 
-        return avaliacaos;
+            return avaliacaos;
 
 
-    }
+        }
 
 
-    public void deletAvaliacao(int idAvaliacao, int idNotiticacao){
+
+   /* public void deletAvaliacao(int idAvaliacao, int idNotiticacao){
 
         db = avaliacaoHelper.getWritableDatabase();
         db.delete("Notificacao", "Notificacao._id" + "='" + idNotiticacao + "'", null);
@@ -115,6 +117,6 @@ public class DataBasePersistencia {
         db = avaliacaoHelper.getReadableDatabase();
 
     }
-
+*/
 
 }

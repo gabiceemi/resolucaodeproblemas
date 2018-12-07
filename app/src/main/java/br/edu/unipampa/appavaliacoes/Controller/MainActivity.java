@@ -1,5 +1,6 @@
 package br.edu.unipampa.appavaliacoes.Controller;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -108,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         private final List<Avaliacao> listAvaliacao;
         private final Activity act;
-        private ImageButton edit;
-        private ImageButton delet;
+        private ImageView edit;
+        private ImageView delet;
         private TextView tituloEdit;
         private TextView viewDataEdit;
         private TextView viewHoraEdit;
@@ -138,24 +139,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return 0;
         }
 
+        @SuppressLint("WrongViewCast")
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view = act.getLayoutInflater().inflate(R.layout.list_perso, parent, false);
-
+            View view = act.getLayoutInflater().inflate(R.layout.activity_list_adapter_avalicoes, parent, false);
             Avaliacao avaliacao = listAvaliacao.get(position);
-            ImageView isbookicone;
             TextView  titulo;
             TextView data;
             TextView hora;
 
-            isbookicone = (ImageView) view.findViewById(R.id.isbookicone);
-            titulo = (TextView)view.findViewById(R.id.titulo);
-            data = (TextView)view.findViewById(R.id.data);
-            hora = (TextView)view.findViewById(R.id.hora);
+            titulo = (TextView)view.findViewById(R.id.tituloAvaliacao);
+            data = (TextView)view.findViewById(R.id.dataAvaliacao);
+            hora = (TextView)view.findViewById(R.id.horaAvaliacao);
 
             /* Botões */
 
-            edit = (ImageButton) view.findViewById(R.id.btn_edit_list);
+            edit = (ImageView) view.findViewById(R.id.editar);
             edit.setOnClickListener(new View.OnClickListener(){
 
                 @Override
@@ -173,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             });
 
 
-            delet = (ImageButton) view.findViewById(R.id.btn_delet_list);
+            delet = (ImageView) view.findViewById(R.id.deletar);
 
             delet.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -182,8 +181,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
 
-
-            titulo.setText(avaliacao.getTitulo());
+            if(avaliacao.getTitulo().length() > 27) {
+                titulo.setText(avaliacao.getTitulo().substring(0, 27) + "...");
+            } else {
+                titulo.setText(avaliacao.getTitulo());
+            }
             data.setText(avaliacao.getDataDaAvaliacao());
             hora.setText(avaliacao.getHoraDaAvaliacao());
             return view;
