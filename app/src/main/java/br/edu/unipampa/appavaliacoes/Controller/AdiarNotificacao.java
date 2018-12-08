@@ -75,7 +75,7 @@ public class AdiarNotificacao extends AppCompatActivity implements View.OnClickL
             timePickerDialog.show();
         }
         if (view == notificacao) {
-            setContentView(R.layout.activity_tipo_notificacao);
+            setContentView(R.layout.activity_notificacao);
         }
         if (view == salvar) {
 

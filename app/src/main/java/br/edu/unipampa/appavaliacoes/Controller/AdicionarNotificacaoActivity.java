@@ -31,7 +31,7 @@ public class AdicionarNotificacaoActivity extends AppCompatActivity implements V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tipo_notificacao);
+        setContentView(R.layout.activity_notificacao);
         localizarCampos();
 
         notificacao = new Notificacao();
@@ -40,12 +40,12 @@ public class AdicionarNotificacaoActivity extends AppCompatActivity implements V
     }
 
     public void localizarCampos() {
-        confirmar = findViewById(R.id.btn_confirmar);
-        voltar = findViewById(R.id.btn_voltar);
+        confirmar = findViewById(R.id.btn_confirmar_editar);
+        voltar = findViewById(R.id.btn_voltar_editar);
         voltar.setOnClickListener(this);
-        tipoNotificacao = findViewById(R.id.switch_sonoro);
-        data = findViewById(R.id.btnData);
-        horario = findViewById(R.id.btnHora);
+        tipoNotificacao = findViewById(R.id.switch_sonoro_editar);
+        data = findViewById(R.id.btnData_editar);
+        horario = findViewById(R.id.btnHora_editar);
 
 
     }
@@ -54,7 +54,7 @@ public class AdicionarNotificacaoActivity extends AppCompatActivity implements V
         final Calendar c = Calendar.getInstance();
 
         switch (view.getId()) {
-            case R.id.btnData:
+            case R.id.btnData_editar:
                 dia = c.get(Calendar.DAY_OF_MONTH);
                 mes = c.get(Calendar.MONTH);
                 ano = c.get(Calendar.YEAR);
@@ -70,7 +70,7 @@ public class AdicionarNotificacaoActivity extends AppCompatActivity implements V
 
                 break;
 
-            case R.id.btnHora:
+            case R.id.btnHora_editar:
                 hora = c.get(Calendar.HOUR_OF_DAY);
                 minutos = c.get(Calendar.MINUTE);
 
@@ -83,7 +83,7 @@ public class AdicionarNotificacaoActivity extends AppCompatActivity implements V
                 timePickerDialog.show();
                 break;
 
-            case R.id.btn_confirmar:
+            case R.id.btn_confirmar_editar:
 
 //                String t = tipo.toString();
 //                notificacao.setTipoNotifi(t);

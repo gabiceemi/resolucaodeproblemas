@@ -38,9 +38,9 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
         dataBasePersistencia = new DataBasePersistencia(this);
         localizarCampos();
 
-        notificacao = findViewById(R.id.textViewNotificacao);
-        salvar = findViewById(R.id.salvar);
-        cancelar = findViewById(R.id.cancelar);
+        notificacao = findViewById(R.id.textViewNotificacao_editar);
+        salvar = findViewById(R.id.salvar_editar);
+        cancelar = findViewById(R.id.cancelar_editar);
 
         salvar.setOnClickListener(this);
         cancelar.setOnClickListener(this);
@@ -52,10 +52,10 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
 
     public void localizarCampos(){
 
-        titulo = findViewById(R.id.titulo);
-        descricao = findViewById(R.id.descricao);
-        data = findViewById(R.id.viewData);
-        horario = findViewById(R.id.viewHora);
+        titulo = findViewById(R.id.titulo_editar);
+        descricao = findViewById(R.id.descricao_editar);
+        data = findViewById(R.id.viewData_editar);
+        horario = findViewById(R.id.viewHora_editar);
 
     }
 

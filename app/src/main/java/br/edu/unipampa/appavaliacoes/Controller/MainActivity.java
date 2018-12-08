@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ import br.edu.unipampa.appavaliacoes.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public FloatingActionButton adicionar;
-    public List<Avaliacao> list = new ArrayList<>();
+    public ArrayList<Avaliacao> avaliacoes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,24 +46,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         adicionar = findViewById(R.id.adicionar);
         adicionar.setOnClickListener(this);
-
-        ListView lw = (ListView) findViewById(R.id.listView);
-
-        list = carregaAvaliacao();
-        AtividadeAdapter ap = new AtividadeAdapter(list, this);
-        lw.setAdapter(ap);
-
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         apresentaAvaliacoes();
-
     }
 
-    public List<Avaliacao> carregaAvaliacao(){
+    public ArrayList<Avaliacao> carregaAvaliacao(){
         DataBasePersistencia db = new DataBasePersistencia(this);
         return db.consultaBase();
 
@@ -79,77 +66,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void apresentaAvaliacoes(){
+        avaliacoes = carregaAvaliacao();
+        ListView listView = (ListView) findViewById(R.id.listView);
+        ListAdapterAvaliacao adapterAvaliacao = new ListAdapterAvaliacao(getBaseContext(), avaliacoes);
+        listView.setAdapter((ListAdapter) adapterAvaliacao);
 
-    }
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-    public class AtividadeAdapter extends BaseAdapter{
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getBaseContext(), EditarAvaliacaoActivity.class);
+                Bundle bundle = new Bundle();
 
-        private final List<Avaliacao> listAvaliacao;
-        private final Activity act;
-        private ImageView edit;
-        private ImageView delet;
+                bundle.putInt("id", (int) avaliacoes.get(position).getId());
+                bundle.putString("titulo", avaliacoes.get(position).getTitulo());
+                bundle.putString("descricao", avaliacoes.get(position).getDescricao());
+                bundle.putString("data", avaliacoes.get(position).getHoraDaAvaliacao());
+                bundle.putString("hora", avaliacoes.get(position).getDataDaAvaliacao());
+                i.putExtras(bundle);
 
-        public AtividadeAdapter(List<Avaliacao> objects, Activity act) {
-            this.listAvaliacao = objects;
-
-            this.act =act;
-               }
-
-        @Override
-        public int getCount() {
-            return listAvaliacao.size();
-        }
-
-
-        @Override
-        public Object getItem(int position) {
-            return listAvaliacao.get(position);
-        }
-
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @SuppressLint("WrongViewCast")
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = act.getLayoutInflater().inflate(R.layout.activity_list_adapter_avalicoes, parent, false);
-            Avaliacao avaliacao = listAvaliacao.get(position);
-            TextView  titulo = view.findViewById(R.id.tituloAvaliacao);
-            TextView data = view.findViewById(R.id.dataAvaliacao);
-            TextView hora = view.findViewById(R.id.horaAvaliacao);
-
-            edit = view.findViewById(R.id.editar);
-            edit.setOnClickListener(new View.OnClickListener(){
-
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this,
-                            AdicionarAvaliacaoActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
-
-            delet = (ImageView) view.findViewById(R.id.deletar);
-            delet.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Acao do segundo botao
-                }
-            });
-
-            data.setText(avaliacao.getDataDaAvaliacao());
-            hora.setText(avaliacao.getHoraDaAvaliacao());
-            if(avaliacao.getTitulo().length() > 27) {
-                titulo.setText(avaliacao.getTitulo().substring(0, 27) + "...");
-            } else {
-                titulo.setText(avaliacao.getTitulo());
+                startActivity(i);
+                finish();
             }
+        });
 
-            return view;
-        }
     }
 }

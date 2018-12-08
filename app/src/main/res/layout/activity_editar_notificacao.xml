@@ -4,14 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.AdicionarNotificacaoActivity">
-
-    <!--<android.support.constraint.ConstraintLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
+    tools:context=".Controller.EditarNotificacaoActivity">
 
     <ImageButton
-        android:id="@+id/btn_voltar"
+        android:id="@+id/btn_voltar_editar"
         android:layout_width="19dp"
         android:layout_height="23dp"
         android:layout_marginStart="27dp"
@@ -22,7 +18,7 @@
         app:srcCompat="@mipmap/cancel" />
 
     <Button
-        android:id="@+id/btn_confirmar"
+        android:id="@+id/btn_confirmar_editar"
         android:layout_width="117dp"
         android:layout_height="59dp"
         android:layout_marginTop="18dp"
@@ -37,7 +33,7 @@
 
 
     <Switch
-        android:id="@+id/switch_luminoso"
+        android:id="@+id/switch_luminoso_editar"
         android:layout_width="306dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
@@ -48,7 +44,7 @@
         tools:layout_editor_absoluteY="108dp" />
 
     <Switch
-        android:id="@+id/switch_mensagem"
+        android:id="@+id/switch_mensagem_editar"
         android:layout_width="306dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
@@ -57,10 +53,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.442"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_sonoro" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_sonoro_editar" />
 
     <Switch
-        android:id="@+id/switch_sonoro"
+        android:id="@+id/switch_sonoro_editar"
         android:layout_width="306dp"
         android:layout_height="36dp"
         android:layout_marginStart="8dp"
@@ -71,10 +67,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.548"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_luminoso" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_luminoso_editar" />
 
     <TextView
-        android:id="@+id/btnData"
+        android:id="@+id/btnData_editar"
 
         android:layout_width="107dp"
         android:layout_height="40dp"
@@ -85,12 +81,13 @@
         android:onClick="eventClick"
         android:text="Dia"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/viewHora"
+        app:layout_constraintEnd_toStartOf="@+id/viewHora_editar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_mensagem" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_mensagem_editar"
+        tools:ignore="OnClick" />
 
     <TextView
-        android:id="@+id/btnHora"
+        android:id="@+id/btnHora_editar"
 
         android:layout_width="96dp"
         android:layout_height="44dp"
@@ -101,7 +98,8 @@
         android:text="Hora"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_mensagem" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_mensagem_editar"
+        tools:ignore="OnClick" />
 
 
 
