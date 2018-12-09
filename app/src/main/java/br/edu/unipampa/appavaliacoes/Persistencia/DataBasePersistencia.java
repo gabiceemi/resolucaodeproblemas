@@ -21,7 +21,21 @@ public class DataBasePersistencia {
         avaliacaoHelper = new AvaliacaoDBHelper(context);
     }
 
-    public void insertAvaliacao(Avaliacao avaliacao) {
+
+    public void insertAvalicao(Avaliacao avaliacao, int verificador) {
+        if (verificador == -1) {
+            insert(avaliacao);
+
+        } else {
+
+            // updateAvaliacao(Avalicao avalicao);
+        }
+
+
+    }
+
+
+    public void insert(Avaliacao avaliacao) {
 
         try {
             db = avaliacaoHelper.getWritableDatabase();
@@ -43,39 +57,46 @@ public class DataBasePersistencia {
         }
     }
 
-    public void insertTipoNotoficacao(DataBaseContract.TipoNotificacao tipoNotificacao) {
-
-        try {
-            db = avaliacaoHelper.getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-
-
-            values.put(DataBaseContract.TipoNotificacao.COLUNA_TIPO, Notificacao.getTipoNotifi());
-
-
-            long idNotificacao = db.insert(DataBaseContract.TipoNotificacao.NOME_TABELA, null, values);
-
-//            tipoNotificacao.setId(idNotificacao);
-
-            db.close();
-        } catch (Exception e) {
-            db.close();
-        }
-    }
+    /**
+     * NÂO FAZ SENTIDO ESSE METODO, TIPONOTIFICAÇAO = ENUM NO BANCO
+     * @param tipoNotificacao
+     */
+    /**
+     * public void insertTipoNotoficacao(DataBaseContract.TipoNotificacao tipoNotificacao) {
+     * <p>
+     * try {
+     * db = avaliacaoHelper.getWritableDatabase();
+     * <p>
+     * ContentValues values = new ContentValues();
+     * <p>
+     * <p>
+     * values.put(DataBaseContract.TipoNotificacao.COLUNA_TIPO, Notificacao.getTipoNotifi());
+     * <p>
+     * <p>
+     * long idNotificacao = db.insert(DataBaseContract.TipoNotificacao.NOME_TABELA, null, values);
+     * <p>
+     * //            tipoNotificacao.setId(idNotificacao);
+     * <p>
+     * db.close();
+     * } catch (Exception e) {
+     * db.close();
+     * }
+     * }
+     */
 
 
     public ArrayList<Avaliacao> consultaBase() {
 
         ArrayList<Avaliacao> avaliacaos = new ArrayList<>();
+        ArrayList<Notificacao> notificacaos = new ArrayList<>();
         Avaliacao avaliacao;
+        Notificacao notificacao;
 
         db = avaliacaoHelper.getReadableDatabase();
 
-        //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id" +
-        // " INNER JOIN  AdicionarNotificacaoActivity on AdicionarNotificacaoActivity._id = Notificacao.tiponotificacao", null);
+        //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id INNER JOIN   TipoNotificacao on Notificacao.tiponotificacao = TipoNotificacao._id", null);
 
-        Cursor c = db.rawQuery("SELECT * FROM Avaliacao",null);
+        Cursor c = db.rawQuery("SELECT * FROM Avaliacao", null);
         if (c.moveToFirst()) {
             c = db.rawQuery("SELECT * FROM Avaliacao", null);
             if (c.moveToFirst()) {
@@ -90,20 +111,30 @@ public class DataBasePersistencia {
                     avaliacao = new Avaliacao(idAvaliacao, tituloAvaliacao, descricaoAvaliacao, dataAvaliacao, horaAvaliacao);
                     avaliacaos.add(avaliacao);
 
+                    /*
+                    int idNotificacao = c.getInt(5);
+                    String dataNotificacao = c.getString(6);
+                    String horaNotificacao = c.getString(7);
+                    String mensagenNotificao = c.getString(8);
+                    int idTipoNotificao = c.getInt(11);
+
+                    notificacao = new Notificacao(idNotificacao, dataNotificacao,horaNotificacao,idTipoNotificao);
+                    notificacaos.add(notificacao);
+                    */
+
                 } while (c.moveToNext());
             }
             c.close();
             db.close();
         }
 
-            return avaliacaos;
+        return avaliacaos;
 
 
-        }
+    }
 
 
-
-   /* public void deletAvaliacao(int idAvaliacao, int idNotiticacao){
+    public void deletAvaliacao(int idAvaliacao, int idNotiticacao) {
 
         db = avaliacaoHelper.getWritableDatabase();
         db.delete("Notificacao", "Notificacao._id" + "='" + idNotiticacao + "'", null);
@@ -112,11 +143,31 @@ public class DataBasePersistencia {
     }
 
 
-    public void updateAvaliacao(int idAvaliacao, int idNotiticacao){
+    public void updateAvaliacao(Avaliacao avaliacao, Notificacao notificacao) {
 
-        db = avaliacaoHelper.getReadableDatabase();
 
+        try {
+            db = avaliacaoHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+
+            values.put(DataBaseContract.Avaliacao.COLUNA_TITULO, avaliacao.getTitulo());
+            values.put(DataBaseContract.Avaliacao.COLUNA_DESCRICAO, avaliacao.getDescricao());
+            values.put(DataBaseContract.Avaliacao.COLUNA_DATA, avaliacao.getDataDaAvaliacao());
+            values.put(DataBaseContract.Avaliacao.COLUNA_HORARIO, avaliacao.getHoraDaAvaliacao());
+            db.update(DataBaseContract.Avaliacao.NOME_TABELA, values, "_id = ?", new String[]{String.valueOf(avaliacao.getId())});
+
+            values.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO, notificacao.getData());
+            values.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, notificacao.getHora());
+
+            values.put(DataBaseContract.Notificacao.COLUNA_FK_TIPO_NOTIFICACAO, notificacao.getTipoNotifi());
+            db.update(DataBaseContract.Notificacao.NOME_TABELA, values, "_id = ?", new String[]{String.valueOf(notificacao.getId())});
+
+            db.close();
+        } catch (Exception e) {
+
+            db.close();
+        }
     }
-*/
+
 
 }
