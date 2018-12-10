@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import br.edu.unipampa.appavaliacoes.Model.Notificacao;
+import br.edu.unipampa.appavaliacoes.Persistencia.DataBaseContract;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
@@ -85,8 +86,9 @@ public class AdicionarNotificacaoActivity extends AppCompatActivity implements V
 
             case R.id.btn_confirmar_editar:
 
-//                String t = tipo.toString();
-//                notificacao.setTipoNotifi(t);
+                notificacao.setTipoNotifi(tipoNotificacao.getText().toString());
+                dataBasePersistencia.insert(notificacao);
+
 
               Toast.makeText(AdicionarNotificacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
                 break;

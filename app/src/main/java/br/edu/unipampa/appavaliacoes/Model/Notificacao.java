@@ -4,32 +4,37 @@ package br.edu.unipampa.appavaliacoes.Model;
 
 public class Notificacao {
 
-	private int id;
+	private long id;
 	private String data;
 	private String hora;
-	private int tipoNotifi;
+	private String tipoNotifi;
 
 	public Notificacao() {
 
 		this.data = "";
 		this.hora = "00:00";
-		this.tipoNotifi = 2;
+		this.tipoNotifi = "";
 	}
 
-	public  Notificacao(int id, String data, String hora, int tipoNotifi) {
 
-		this.id = id;
-		this.data = data;
-		this.hora = hora;
-		this.tipoNotifi = tipoNotifi;
-	}
+    public  Notificacao(int id, String data, String hora, String tipoNotifi) {
 
+        this.id = id;
+        this.data = data;
+        this.hora = hora;
+        this.tipoNotifi = tipoNotifi;
+    }
+    public  Notificacao(int id, String tipoNotifi) {
+
+        this.id = id;
+        this.tipoNotifi = tipoNotifi;
+    }
 
 	private ArrayList<Notificacao> notificacoes;
 
 
 	public int getId() {
-		return id;
+		return (int) id;
 	}
 
 	public void setId(int id) {
@@ -39,7 +44,7 @@ public class Notificacao {
 	public boolean isValida() {
 
 		return false;
-	}
+	};
 
 	public String getData() {
 
@@ -61,12 +66,12 @@ public class Notificacao {
 		this.hora = hora;
 	}
 
-	public int getTipoNotifi()
+	public String getTipoNotifi()
 	{
 		return tipoNotifi;
 	}
 
-	public void setTipoNotifi(int tipoNotifi) {
+	public void setTipoNotifi(String tipoNotifi) {
 
 		this.tipoNotifi = tipoNotifi;
 	}

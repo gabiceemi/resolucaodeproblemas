@@ -34,6 +34,18 @@ public class DataBasePersistencia {
 
     }
 
+    public void insertNotificacao(Notificacao notificacao, int verificador) {
+        if (verificador == -1) {
+            insert(notificacao);
+
+        } else {
+
+
+        }
+
+
+    }
+
 
     public void insert(Avaliacao avaliacao) {
 
@@ -50,6 +62,26 @@ public class DataBasePersistencia {
             long idAvaliacao = db.insert(DataBaseContract.Avaliacao.NOME_TABELA, null, values);
 
             avaliacao.setId(idAvaliacao);
+            System.out.print("deu certo");
+            db.close();
+        } catch (Exception e) {
+            db.close();
+        }
+    }
+
+
+    public void insert(Notificacao notificacao) {
+
+        try {
+            db = avaliacaoHelper.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+
+            values.put(DataBaseContract.TipoNotificacao.COLUNA_TIPO, notificacao.getTipoNotifi());
+
+            long idAvaliacao = db.insert(DataBaseContract.TipoNotificacao.NOME_TABELA, null, values);
+
+            notificacao.setId((int) idAvaliacao);
             System.out.print("deu certo");
             db.close();
         } catch (Exception e) {
