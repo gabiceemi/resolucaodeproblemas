@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -28,6 +29,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
     public ImageButton cancelar;
     public DataBasePersistencia dataBasePersistencia;
     public Avaliacao avaliacao;
+    public TextView dataNotificacao, horarioNotificacao, tipoNotificacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +40,16 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
         dataBasePersistencia = new DataBasePersistencia(this);
         localizarCampos();
 
-        notificacao = findViewById(R.id.textViewNotificacao_editar);
         salvar = findViewById(R.id.salvar_editar);
         cancelar = findViewById(R.id.cancelar_editar);
+
 
         salvar.setOnClickListener(this);
         cancelar.setOnClickListener(this);
         data.setOnClickListener(this);
         horario.setOnClickListener(this);
-        notificacao.setOnClickListener(this);
+        dataNotificacao.setOnClickListener(this);
+        horarioNotificacao.setOnClickListener(this);
 
     }
 
@@ -56,6 +59,10 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
         descricao = findViewById(R.id.descricao_editar);
         data = findViewById(R.id.viewData_editar);
         horario = findViewById(R.id.viewHora_editar);
+
+        tipoNotificacao = findViewById(R.id.switch_sonoro_editar);
+        dataNotificacao = findViewById(R.id.viewData_notificacao_editar);
+        horarioNotificacao = findViewById(R.id.viewHora_notificacao);
 
     }
 
@@ -89,8 +96,35 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             },hora,minutos,false);
             timePickerDialog.show();
         }
-        if(v==notificacao){
-            startActivity(new Intent(AdicionarAvaliacaoActivity.this, AdicionarNotificacaoActivity.class));
+        if(v==dataNotificacao){
+            final Calendar c = Calendar.getInstance();
+            dia = c.get(Calendar.DAY_OF_MONTH);
+            mes = c.get(Calendar.MONTH);
+            ano = c.get(Calendar.YEAR);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    data.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                }
+            }
+                    , dia, mes, ano);
+            datePickerDialog.show();
+
+        }
+        if(v==horarioNotificacao){
+            final Calendar c = Calendar.getInstance();
+            hora = c.get(Calendar.HOUR_OF_DAY);
+            minutos = c.get(Calendar.MINUTE);
+
+            TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                    horario.setText(hourOfDay + ":" + minute);
+                }
+            }, hora, minutos, false);
+            timePickerDialog.show();
+
         }
         if(v==salvar){
 
@@ -99,6 +133,11 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             avaliacao.setDataDaAvaliacao(data.getText().toString());
             avaliacao.setHoraDaAvaliacao(horario.getText().toString());
             dataBasePersistencia.insertAvalicao(avaliacao, -1);
+
+            Toast.makeText(AdicionarAvaliacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
 
         }
         if(v==cancelar){

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.EditarAvaliacaoActivity">
+    tools:context=".Controller.AdicionarAvaliacaoActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,8 +19,7 @@
             android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/cancel"
-            />
+            app:srcCompat="@mipmap/cancel" />
 
         <Button
             android:id="@+id/salvar_editar"
@@ -76,13 +75,37 @@
             app:layout_constraintTop_toBottomOf="@+id/titulo_editar" />
 
         <TextView
+            android:id="@+id/viewData_notificacao_editar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:text="Dia"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNotificacao_editar" />
+
+        <TextView
+            android:id="@+id/viewHora_notificacao_editar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:text="Hora"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/viewData_notificacao_editar"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNotificacao_editar" />
+
+        <TextView
             android:id="@+id/viewData_editar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
             android:layout_marginTop="8dp"
-            android:text="Dia"
             android:clickable="true"
+            android:text="Dia"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewDt" />
@@ -91,12 +114,12 @@
             android:id="@+id/viewHora_editar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:text="Hora"
             android:clickable="true"
+            android:text="Hora"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/viewData_editar"
             app:layout_constraintTop_toBottomOf="@+id/textViewDt" />
 
         <ImageView
@@ -104,9 +127,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewData_editar"
+            app:layout_constraintTop_toBottomOf="@+id/descricao_editar"
             app:srcCompat="@mipmap/alarm" />
 
         <TextView
@@ -114,21 +137,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="22dp"
             android:clickable="true"
-            android:text="Adicionar notificação"
+            android:text="Notificação:"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewData_editar" />
+            app:layout_constraintTop_toBottomOf="@+id/descricao_editar" />
 
         <ImageView
             android:id="@+id/viewText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNotificacao_editar"
+            app:layout_constraintTop_toBottomOf="@+id/viewData_editar"
             app:srcCompat="@mipmap/text" />
 
         <EditText
@@ -137,7 +160,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="58dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="@android:color/transparent"
             android:hint="Adicionar descrição"
@@ -145,7 +168,63 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNotificacao_editar" />
+            app:layout_constraintTop_toBottomOf="@+id/viewHora_editar" />
+
+        <EditText
+            android:id="@+id/mensagem_notificacao_editar"
+            style="@style/Base.Widget.MaterialComponents.TextInputEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="58dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="Mensagem notificação"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_mensagem_editar" />
+
+        <Switch
+            android:id="@+id/switch_luminoso_editar"
+            android:layout_width="306dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Luminosa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewData_notificacao_editar" />
+
+        <Switch
+            android:id="@+id/switch_mensagem_editar"
+            android:layout_width="306dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Mensagem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.442"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_sonoro_editar" />
+
+        <Switch
+            android:id="@+id/switch_sonoro_editar"
+            android:layout_width="306dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:checked="false"
+            android:text="Sonoro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/switch_luminoso_editar" />
 
         <ImageView
             android:id="@+id/deletar_editar"
@@ -159,13 +238,5 @@
             app:srcCompat="@mipmap/delete" />
 
     </android.support.constraint.ConstraintLayout>
-
-    <ScrollView
-        android:id="@+id/excluir_editar"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-
-    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
