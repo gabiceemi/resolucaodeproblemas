@@ -2,6 +2,7 @@ package br.edu.unipampa.appavaliacoes.Controller;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -134,6 +135,8 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             dataBasePersistencia.insertAvalicao(avaliacao, -1);
 
             Toast.makeText(AdicionarAvaliacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
 
         }
