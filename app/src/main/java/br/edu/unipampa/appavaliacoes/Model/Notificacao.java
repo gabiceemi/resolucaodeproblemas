@@ -14,11 +14,12 @@ public class Notificacao {
 
 	}
 
-	public Notificacao(int idNotificacao, String dataNotificacao, String horaNotificacao, int idTipoNotificao) {
-
-		this.data = "";
-		this.hora = "00:00";
-		this.tipoNotifi = 0;
+	public Notificacao(int idNotificacao, String dataNotificacao, String horaNotificacao, String mensagemNotificao, int idTipoNotificao) {
+		this.id = idNotificacao;
+		this.mensagem = mensagemNotificao;
+		this.data = dataNotificacao;
+		this.hora = horaNotificacao;
+		this.tipoNotifi = idTipoNotificao;
 	}
 
 
@@ -42,11 +43,6 @@ public class Notificacao {
         this.hora = hora;
         this.tipoNotifi = tipoNotifi;
         this.mensagem = mensagem;
-    }
-    public  Notificacao(int id, String dataNotificacao, String horaNotificacao, String mensagemNotificao, int tipoNotifi) {
-
-        this.id = id;
-        this.tipoNotifi = tipoNotifi;
     }
 
 	private ArrayList<Notificacao> notificacoes;

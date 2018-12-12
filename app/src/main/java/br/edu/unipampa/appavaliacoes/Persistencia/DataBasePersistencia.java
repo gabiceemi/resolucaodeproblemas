@@ -100,7 +100,7 @@ public class DataBasePersistencia {
 
     public Notificacao consultaNotificacao(int id){
 
-        Notificacao notificacao = null;
+        Notificacao notificacao = new Notificacao();
 
         db = avaliacaoHelper.getReadableDatabase();
 
@@ -115,9 +115,9 @@ public class DataBasePersistencia {
         int idTipoNotificao = c.getInt(5);
 
         notificacao = new Notificacao(idNotificacao, dataNotificacao, horaNotificacao, mensagemNotificao, idTipoNotificao);
-
             } while (c.moveToNext());
         }
+
         c.close();
         db.close();
 

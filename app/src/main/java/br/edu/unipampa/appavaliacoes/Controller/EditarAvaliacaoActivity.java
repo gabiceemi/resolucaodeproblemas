@@ -21,27 +21,13 @@ import br.edu.unipampa.appavaliacoes.R;
 
 public class EditarAvaliacaoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private int id;
-    private String titulo_edit;
-    private String descricao_edit;
-    private String dataDaAvaliacao;
-    private String horaDaAvaliacao;
-    private int tipoNotifi;
-    private String dataNotificacao;
-    private String horarioNotificacao;
-    private String mensagem;
-
-    private  int dia,mes,ano,hora,minutos;
-
+    private int id, dia,mes,ano,hora,minutos;
+    private String titulo_edit,descricao_edit,dataDaAvaliacao, horaDaAvaliacao;
     private EditText textViewTitulo, textViewDescricao, textoMensagem;
     private TextView textViewData, textViewHora, textViewDataNotificacao, textViewHoraNotificacac;
     private Switch luminoso, sonoro, mensagemSwitch;
-
     public Button salvar;
     public ImageButton cancelar;
-
-    Notificacao notificacao;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,11 +43,6 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
         dataDaAvaliacao = bundle.getString("data");
         horaDaAvaliacao = bundle.getString("hora");
 
-        tipoNotifi = bundle.getInt("tipoNotifi");
-        dataNotificacao = bundle.getString("dataNotificacao");
-        horarioNotificacao = bundle.getString("horarioNotificacao");
-        mensagem = bundle.getString("mensagem");
-
         localizarCampos();
         apresentarDados();
 
@@ -74,12 +55,6 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
         salvar.setOnClickListener(this);
         cancelar.setOnClickListener(this);
 
-    }
-
-    private Notificacao puxarNotificacao(){
-        DataBasePersistencia db = new DataBasePersistencia(this);
-        notificacao = db.consultaNotificacao(id);
-        return notificacao;
     }
 
     private void localizarCampos() {
@@ -97,20 +72,21 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
 
 
     private void apresentarDados(){
-        notificacao = puxarNotificacao();
+        DataBasePersistencia db = new DataBasePersistencia(this);
+        Notificacao notificacao = db.consultaNotificacao(id);
         textViewTitulo.setText(titulo_edit);
         textViewDescricao.setText(descricao_edit);
         textViewData.setText(dataDaAvaliacao);
         textViewHora.setText(horaDaAvaliacao);
-        textViewDataNotificacao.setText(dataNotificacao);
-        textViewHoraNotificacac.setText(horarioNotificacao);
-        if(tipoNotifi == 1){
+        textViewDataNotificacao.setText(notificacao.getData());
+        textViewHoraNotificacac.setText(notificacao.getHora());
+        if(notificacao.getTipoNotifi() == 1){
             luminoso.setChecked(true);
-        }else if (tipoNotifi == 2){
+        }else if (notificacao.getTipoNotifi() == 2){
             sonoro.setChecked(true);
-        }else if(tipoNotifi == 3){
+        }else if(notificacao.getTipoNotifi() == 3){
             mensagemSwitch.setChecked(true);
-            textoMensagem.setText(mensagem);
+            textoMensagem.setText(notificacao.getMenssagem());
         }
 
     }

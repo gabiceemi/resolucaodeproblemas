@@ -24,7 +24,7 @@ import br.edu.unipampa.appavaliacoes.R;
 
 public class AdicionarAvaliacaoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public TextView data, horario;
+    public TextView data, horario, dataNotificacao, horarioNotificacao;
     private  int dia,mes,ano,hora,minutos;
     public Button salvar;
     public EditText titulo, descricao, mensagem;
@@ -32,7 +32,6 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
     public DataBasePersistencia dataBasePersistencia;
     public Avaliacao avaliacao;
     public Notificacao notificacao;
-    public TextView dataNotificacao, horarioNotificacao;
     public Switch tipoSonoro, tipoLuminoso, tipoMensagem;
 
     @Override
