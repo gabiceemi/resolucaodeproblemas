@@ -11,6 +11,12 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+
+import java.util.ArrayList;
+
+import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
+import br.edu.unipampa.appavaliacoes.Model.Notificacao;
+import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 import static br.edu.unipampa.appavaliacoes.Service.Channel.CHANNEL_1_ID;
 
@@ -28,6 +34,34 @@ public class NotificationChannel extends AppCompatActivity {
 
         text = findViewById(R.id.text_tittle);
         msn = findViewById(R.id.message);
+
+    }
+
+
+
+
+    public void enviaDados(int id){
+
+       Avaliacao avaliacao = new Avaliacao();
+       Notificacao notifica = new Notificacao();
+
+       DataBasePersistencia db = new DataBasePersistencia(this);
+            avaliacao = db.consultaBaseAvalicao(id);
+           // notifica = db.consultaBaseNotifica();
+
+
+       Intent i = new Intent(getBaseContext(), EditarAvaliacaoActivity.class);
+        Bundle bundle = new Bundle();
+
+        bundle.putInt("id", (int) avaliacao.getId());
+        bundle.putString("titulo", avaliacao.getTitulo());
+        bundle.putString("descricao", avaliacao.getDescricao());
+        bundle.putString("data", avaliacao.getHoraDaAvaliacao());
+        bundle.putString("hora", avaliacao.getDataDaAvaliacao());
+        i.putExtras(bundle);
+
+        startActivity(i);
+        finish();
 
     }
 
@@ -61,13 +95,11 @@ public class NotificationChannel extends AppCompatActivity {
     public void notificatinLight(){
         String title = text.getText().toString();
         String menssagem = msn.getText().toString();
-       /* Intent activityIntent = new Intent(this,Notification.class );
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent,0);*/
-
 
         Intent intentNotification = new Intent (this,AdiarNotificacao.class);
-        /*broadCastIntent.putExtra("tostMessage", menssagem);*/
+        Intent intent = new Intent (this,AdicionarAvaliacaoActivity.class);
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
+        PendingIntent action = PendingIntent.getActivity(this,0, intent,0);
 
 
 
@@ -78,7 +110,7 @@ public class NotificationChannel extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .addAction(R.mipmap.ic, "OK", actionIntent)
+                .addAction(R.mipmap.ic, "OK", action)
                 .addAction(R.mipmap.delete,"ADIAR",actionIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
@@ -93,9 +125,10 @@ public class NotificationChannel extends AppCompatActivity {
     public void notificationVibrate(){
         String title = text.getText().toString();
         String menssagem = msn.getText().toString();
-        Intent intentNotification = new Intent (this, AdiarNotificacao.class);
-
+        Intent intentNotification = new Intent (this,EditarAvaliacaoActivity.class);
+        Intent intent = new Intent (this,AdicionarAvaliacaoActivity.class);
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
+        PendingIntent action = PendingIntent.getActivity(this,0, intent,0);
 
 
 
@@ -106,7 +139,7 @@ public class NotificationChannel extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setVibrate(new long[]{150,300, 150,300, 150, 300})
-                .addAction(R.mipmap.ic, "OK", actionIntent)
+                .addAction(R.mipmap.ic, "OK", action)
                 .addAction(R.mipmap.delete,"ADIAR",actionIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
@@ -120,14 +153,10 @@ public class NotificationChannel extends AppCompatActivity {
     public void notificationSound(){
         String title = text.getText().toString();
         String menssagem = msn.getText().toString();
-       /* Intent activityIntent = new Intent(this,Notification.class );
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent,0);*/
-
-
-        Intent intentNotification = new Intent (this, AdiarNotificacao.class);
-        /*broadCastIntent.putExtra("tostMessage", menssagem);*/
+        Intent intentNotification = new Intent (this,EditarAvaliacaoActivity.class);
+        Intent intent = new Intent (this,AdicionarAvaliacaoActivity.class);
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
-
+        PendingIntent action = PendingIntent.getActivity(this,0, intent,0);
 
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
@@ -137,7 +166,7 @@ public class NotificationChannel extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .addAction(R.mipmap.ic, "OK", actionIntent)
+                .addAction(R.mipmap.ic, "OK", action)
                 .addAction(R.mipmap.delete,"ADIAR",actionIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)
@@ -155,13 +184,10 @@ public class NotificationChannel extends AppCompatActivity {
     public void sendOnChannel(View view){
         String title = text.getText().toString();
         String menssagem = msn.getText().toString();
-       /* Intent activityIntent = new Intent(this,Notification.class );
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0, activityIntent,0);*/
-
-
-        Intent intentNotification = new Intent (this, AdiarNotificacao.class);
-        /*broadCastIntent.putExtra("tostMessage", menssagem);*/
+        Intent intentNotification = new Intent (this,EditarAvaliacaoActivity.class);
+        Intent intent = new Intent (this,AdicionarAvaliacaoActivity.class);
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);
+        PendingIntent action = PendingIntent.getActivity(this,0, intent,0);
 
 
 
@@ -173,7 +199,7 @@ public class NotificationChannel extends AppCompatActivity {
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setVibrate(new long[]{150,300, 150,300})
                 .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                .addAction(R.mipmap.ic, "OK", actionIntent)
+                .addAction(R.mipmap.ic, "OK", action)
                 .addAction(R.mipmap.clock,"ADIAR",actionIntent)
                 .setAutoCancel(true)
                 .setOnlyAlertOnce(true)

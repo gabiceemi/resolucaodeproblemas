@@ -97,9 +97,7 @@ public class DataBasePersistencia {
         //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id INNER JOIN   TipoNotificacao on Notificacao.tiponotificacao = TipoNotificacao._id", null);
 
         Cursor c = db.rawQuery("SELECT * FROM Avaliacao", null);
-        if (c.moveToFirst()) {
-            c = db.rawQuery("SELECT * FROM Avaliacao", null);
-            if (c.moveToFirst()) {
+           if (c.moveToFirst()) {
                 do {
 
                     int idAvaliacao = c.getInt(0);
@@ -126,12 +124,61 @@ public class DataBasePersistencia {
             }
             c.close();
             db.close();
-        }
+
 
         return avaliacaos;
 
 
     }
+
+
+    public Avaliacao consultaBaseAvalicao(int id) {
+
+
+        ArrayList<Notificacao> notificacaos = new ArrayList<>();
+        Avaliacao avaliacao = null;
+
+        db = avaliacaoHelper.getReadableDatabase();
+
+        //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id INNER JOIN   TipoNotificacao on Notificacao.tiponotificacao = TipoNotificacao._id", null);
+
+        Cursor c = db.rawQuery("SELECT * FROM Avaliacao WHERE Avaliacao._id="+ id , null);
+        if (c.moveToFirst()) {
+            do {
+
+                int idAvaliacao = c.getInt(0);
+                String tituloAvaliacao = c.getString(1);
+                String descricaoAvaliacao = c.getString(2);
+                String dataAvaliacao = c.getString(3);
+                String horaAvaliacao = c.getString(4);
+
+                avaliacao = new Avaliacao(idAvaliacao, tituloAvaliacao, descricaoAvaliacao, dataAvaliacao, horaAvaliacao);
+
+
+                    /*
+                    int idNotificacao = c.getInt(5);
+                    String dataNotificacao = c.getString(6);
+                    String horaNotificacao = c.getString(7);
+                    String mensagenNotificao = c.getString(8);
+                    int idTipoNotificao = c.getInt(11);
+
+                    notificacao = new Notificacao(idNotificacao, dataNotificacao,horaNotificacao,idTipoNotificao);
+                    notificacaos.add(notificacao);
+                    */
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+
+        return avaliacao;
+
+
+    }
+
+
+
 
 
     public void deletAvaliacao(int idAvaliacao, int idNotiticacao) {
@@ -168,6 +215,37 @@ public class DataBasePersistencia {
             db.close();
         }
     }
+
+
+
+    public void updateAdiarNotification(int id, String data, String hora, int tipoNotifcacao){
+
+
+
+        try{}catch (Exception e){
+            db = avaliacaoHelper.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+
+            values.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO,data);
+            values.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, hora);
+
+            values.put(DataBaseContract.Notificacao.COLUNA_FK_TIPO_NOTIFICACAO, tipoNotifcacao);
+            db.update(DataBaseContract.Notificacao.NOME_TABELA, values, "_id = ?", new String[]{String.valueOf(id)});
+
+            db.close();
+
+
+
+            db.close();
+        }
+
+
+    }
+
+
+
+
 
 
 }
