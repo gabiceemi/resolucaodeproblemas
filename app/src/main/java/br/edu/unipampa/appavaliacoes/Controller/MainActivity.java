@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bundle.putInt("id", (int) avaliacoes.get(position).getId());
                 bundle.putString("titulo", avaliacoes.get(position).getTitulo());
                 bundle.putString("descricao", avaliacoes.get(position).getDescricao());
-                bundle.putString("data", avaliacoes.get(position).getHoraDaAvaliacao());
-                bundle.putString("hora", avaliacoes.get(position).getDataDaAvaliacao());
+                bundle.putString("data", avaliacoes.get(position).getDataDaAvaliacao());
+                bundle.putString("hora", avaliacoes.get(position).getHoraDaAvaliacao());
 
 
 

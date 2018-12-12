@@ -21,21 +21,6 @@ public class DataBasePersistencia {
         avaliacaoHelper = new AvaliacaoDBHelper(context);
     }
 
-
-//    public void insertAvalicao(Avaliacao avaliacao, int verificador) {
-//        if (verificador == -1) {
-//            insert(avaliacao);
-//
-//        } else {
-//
-//            // updateAvaliacao(Avalicao avalicao);
-//        }
-//
-//
-//    }
-
-
-
     public void insert(Avaliacao avaliacao, Notificacao notificacao) {
 
         try {
@@ -124,56 +109,6 @@ public class DataBasePersistencia {
         return notificacao;
     }
 
-
-    public Avaliacao consultaBaseAvalicao(int id) {
-
-
-        ArrayList<Notificacao> notificacaos = new ArrayList<>();
-        Avaliacao avaliacao = null;
-
-        db = avaliacaoHelper.getReadableDatabase();
-
-        //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id INNER JOIN   TipoNotificacao on Notificacao.tiponotificacao = TipoNotificacao._id", null);
-
-        Cursor c = db.rawQuery("SELECT * FROM Avaliacao WHERE Avaliacao._id="+ id , null);
-        if (c.moveToFirst()) {
-            do {
-
-                int idAvaliacao = c.getInt(0);
-                String tituloAvaliacao = c.getString(1);
-                String descricaoAvaliacao = c.getString(2);
-                String dataAvaliacao = c.getString(3);
-                String horaAvaliacao = c.getString(4);
-
-                avaliacao = new Avaliacao(idAvaliacao, tituloAvaliacao, descricaoAvaliacao, dataAvaliacao, horaAvaliacao);
-
-
-                    /*
-                    int idNotificacao = c.getInt(5);
-                    String dataNotificacao = c.getString(6);
-                    String horaNotificacao = c.getString(7);
-                    String mensagenNotificao = c.getString(8);
-                    int idTipoNotificao = c.getInt(11);
-
-                    notificacao = new Notificacao(idNotificacao, dataNotificacao,horaNotificacao,idTipoNotificao);
-                    notificacaos.add(notificacao);
-                    */
-
-            } while (c.moveToNext());
-        }
-        c.close();
-        db.close();
-
-
-        return avaliacao;
-
-
-    }
-
-
-
-
-
     public void deletAvaliacao(int idAvaliacao, int idNotiticacao) {
 
         db = avaliacaoHelper.getWritableDatabase();
@@ -184,7 +119,6 @@ public class DataBasePersistencia {
 
 
     public void updateAvaliacao(Avaliacao avaliacao, Notificacao notificacao) {
-
 
         try {
             db = avaliacaoHelper.getWritableDatabase();
@@ -209,11 +143,7 @@ public class DataBasePersistencia {
         }
     }
 
-
-
     public void updateAdiarNotification(int id, String data, String hora, int tipoNotifcacao){
-
-
 
         try{}catch (Exception e){
             db = avaliacaoHelper.getWritableDatabase();
@@ -228,17 +158,6 @@ public class DataBasePersistencia {
 
             db.close();
 
-
-
-            db.close();
         }
-
-
     }
-
-
-
-
-
-
 }
