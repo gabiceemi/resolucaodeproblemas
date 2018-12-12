@@ -12,19 +12,13 @@ public class DataBaseContract {
         public static final String COLUNA_HORARIO = "horario";
     }
 
-    public static abstract class TipoNotificacao implements BaseColumns {
-        public static final String NOME_TABELA = "TipoNotificacao";
-        public static final String COLUNA_TIPO = "tipo";
-
-    }
-
     public static abstract class Notificacao implements BaseColumns {
         public static final String NOME_TABELA = "Notificacao";
         public static final String COLUNA_DATA_NOTIFICACAO = "datanotificacao";
         public static final String COLUNA_HORARIO_NOTIFICACAO = "horarionotificacao";
         public static final String COLUNA_MENSAGEM = "mensagem";
         public static final String COLUNA_FK_AVALIACAO = "avaliacao";
-        public static final String COLUNA_FK_TIPO_NOTIFICACAO = "tiponotificacao";
+        public static final String COLUNA_TIPO_NOTIFICACAO = "tiponotificacao";
 
     }
 

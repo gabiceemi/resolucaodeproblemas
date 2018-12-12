@@ -7,24 +7,39 @@ public class Notificacao {
 	private long id;
 	private String data;
 	private String hora;
-	private String tipoNotifi;
+	private int tipoNotifi;
+	private String mensagem;
 
 	public Notificacao() {
 
 		this.data = "";
 		this.hora = "00:00";
-		this.tipoNotifi = "";
+		this.tipoNotifi = 0;
 	}
 
 
-    public  Notificacao(int id, String data, String hora, String tipoNotifi) {
+    public String getMenssagem() {
+        return mensagem;
+    }
+
+    public void setMenssagem(String menssagem) {
+        this.mensagem = menssagem;
+    }
+
+    public void setId(long id) {
+
+        this.id = id;
+    }
+
+    public  Notificacao(int id, String data, String hora, int tipoNotifi, String mensagem) {
 
         this.id = id;
         this.data = data;
         this.hora = hora;
         this.tipoNotifi = tipoNotifi;
+        this.mensagem = mensagem;
     }
-    public  Notificacao(int id, String tipoNotifi) {
+    public  Notificacao(int id, int tipoNotifi) {
 
         this.id = id;
         this.tipoNotifi = tipoNotifi;
@@ -66,12 +81,12 @@ public class Notificacao {
 		this.hora = hora;
 	}
 
-	public String getTipoNotifi()
+	public int getTipoNotifi()
 	{
 		return tipoNotifi;
 	}
 
-	public void setTipoNotifi(String tipoNotifi) {
+	public void setTipoNotifi(int tipoNotifi) {
 
 		this.tipoNotifi = tipoNotifi;
 	}

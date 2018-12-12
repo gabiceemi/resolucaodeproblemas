@@ -14,7 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
 import java.util.ArrayList;
+
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -29,6 +31,7 @@ import org.w3c.dom.ls.LSInput;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.AvaliacaoDBHelper;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBaseContract;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         apresentaAvaliacoes();
     }
 
-    public ArrayList<Avaliacao> carregaAvaliacao(){
+    public ArrayList<Avaliacao> carregaAvaliacao() {
         DataBasePersistencia db = new DataBasePersistencia(this);
         return db.consultaBase();
 
@@ -65,8 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void apresentaAvaliacoes(){
+    public void apresentaAvaliacoes() {
         avaliacoes = carregaAvaliacao();
+
         ListView listView = (ListView) findViewById(R.id.listView);
         ListAdapterAvaliacao adapterAvaliacao = new ListAdapterAvaliacao(getBaseContext(), avaliacoes);
         listView.setAdapter((ListAdapter) adapterAvaliacao);
@@ -83,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bundle.putString("descricao", avaliacoes.get(position).getDescricao());
                 bundle.putString("data", avaliacoes.get(position).getHoraDaAvaliacao());
                 bundle.putString("hora", avaliacoes.get(position).getDataDaAvaliacao());
+
+
                 i.putExtras(bundle);
 
                 startActivity(i);

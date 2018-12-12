@@ -22,32 +22,21 @@ public class DataBasePersistencia {
     }
 
 
-    public void insertAvalicao(Avaliacao avaliacao, int verificador) {
-        if (verificador == -1) {
-            insert(avaliacao);
-
-        } else {
-
-            // updateAvaliacao(Avalicao avalicao);
-        }
-
-
-    }
-
-    public void insertNotificacao(Notificacao notificacao, int verificador) {
-        if (verificador == -1) {
-            insert(notificacao);
-
-        } else {
+//    public void insertAvalicao(Avaliacao avaliacao, int verificador) {
+//        if (verificador == -1) {
+//            insert(avaliacao);
+//
+//        } else {
+//
+//            // updateAvaliacao(Avalicao avalicao);
+//        }
+//
+//
+//    }
 
 
-        }
 
-
-    }
-
-
-    public void insert(Avaliacao avaliacao) {
+    public void insert(Avaliacao avaliacao, Notificacao notificacao) {
 
         try {
             db = avaliacaoHelper.getWritableDatabase();
@@ -60,62 +49,24 @@ public class DataBasePersistencia {
             values.put(DataBaseContract.Avaliacao.COLUNA_HORARIO, avaliacao.getHoraDaAvaliacao());
 
             long idAvaliacao = db.insert(DataBaseContract.Avaliacao.NOME_TABELA, null, values);
-
             avaliacao.setId(idAvaliacao);
+
+            ContentValues notifi = new ContentValues();
+
+            notifi.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO, notificacao.getData());
+            notifi.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, notificacao.getHora());
+            notifi.put(DataBaseContract.Notificacao.COLUNA_MENSAGEM, notificacao.getMenssagem());
+            notifi.put(DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO, idAvaliacao);
+            notifi.put(DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO, notificacao.getTipoNotifi());
+
+            db.insert(DataBaseContract.Notificacao.NOME_TABELA, null, notifi);
+
             System.out.print("deu certo");
             db.close();
         } catch (Exception e) {
             db.close();
         }
     }
-
-
-    public void insert(Notificacao notificacao) {
-
-        try {
-            db = avaliacaoHelper.getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-
-            values.put(DataBaseContract.TipoNotificacao.COLUNA_TIPO, notificacao.getTipoNotifi());
-
-            long idAvaliacao = db.insert(DataBaseContract.TipoNotificacao.NOME_TABELA, null, values);
-
-            notificacao.setId((int) idAvaliacao);
-            System.out.print("deu certo");
-            db.close();
-        } catch (Exception e) {
-            db.close();
-        }
-    }
-
-    /**
-     * NÂO FAZ SENTIDO ESSE METODO, TIPONOTIFICAÇAO = ENUM NO BANCO
-     * @param tipoNotificacao
-     */
-    /**
-     * public void insertTipoNotoficacao(DataBaseContract.TipoNotificacao tipoNotificacao) {
-     * <p>
-     * try {
-     * db = avaliacaoHelper.getWritableDatabase();
-     * <p>
-     * ContentValues values = new ContentValues();
-     * <p>
-     * <p>
-     * values.put(DataBaseContract.TipoNotificacao.COLUNA_TIPO, Notificacao.getTipoNotifi());
-     * <p>
-     * <p>
-     * long idNotificacao = db.insert(DataBaseContract.TipoNotificacao.NOME_TABELA, null, values);
-     * <p>
-     * //            tipoNotificacao.setId(idNotificacao);
-     * <p>
-     * db.close();
-     * } catch (Exception e) {
-     * db.close();
-     * }
-     * }
-     */
-
 
     public ArrayList<Avaliacao> consultaBase() {
 
@@ -191,7 +142,7 @@ public class DataBasePersistencia {
             values.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO, notificacao.getData());
             values.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, notificacao.getHora());
 
-            values.put(DataBaseContract.Notificacao.COLUNA_FK_TIPO_NOTIFICACAO, notificacao.getTipoNotifi());
+            values.put(DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO, notificacao.getTipoNotifi());
             db.update(DataBaseContract.Notificacao.NOME_TABELA, values, "_id = ?", new String[]{String.valueOf(notificacao.getId())});
 
             db.close();

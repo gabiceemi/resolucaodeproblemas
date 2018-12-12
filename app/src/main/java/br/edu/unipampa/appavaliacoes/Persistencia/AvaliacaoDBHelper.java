@@ -30,11 +30,6 @@ public class AvaliacaoDBHelper extends SQLiteOpenHelper {
                     DataBaseContract.Avaliacao.COLUNA_DATA + " TEXT, " +
                     DataBaseContract.Avaliacao.COLUNA_HORARIO + " TEXT);";
 
-    private static final String SQL_CREATE_TABLE_TIPO_NOTIFICACAO =
-            "CREATE TABLE " + DataBaseContract.TipoNotificacao.NOME_TABELA + " (" +
-                    DataBaseContract.TipoNotificacao._ID + " INTEGER PRIMARY KEY," +
-                    DataBaseContract.TipoNotificacao.COLUNA_TIPO+ " TEXT);";
-
     private static final String SQL_CREATE_TABLE_NOTIFICACAO =
             "CREATE TABLE " + DataBaseContract.Notificacao.NOME_TABELA + " (" +
                     DataBaseContract.Notificacao._ID + " INTEGER PRIMARY KEY," +
@@ -42,15 +37,13 @@ public class AvaliacaoDBHelper extends SQLiteOpenHelper {
                     DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO+ " TEXT, "+
                     DataBaseContract.Notificacao.COLUNA_MENSAGEM+ " TEXT, "+
                     DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO+" int not null," +
-                    DataBaseContract.Notificacao.COLUNA_FK_TIPO_NOTIFICACAO+" int not null," +
-                    "FOREIGN KEY ("+ DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO+") REFERENCES "+ DataBaseContract.Avaliacao.NOME_TABELA+"("+DataBaseContract.Avaliacao._ID+"), " +
-                    "FOREIGN KEY ("+ DataBaseContract.Notificacao.COLUNA_FK_TIPO_NOTIFICACAO+") REFERENCES "+ DataBaseContract.TipoNotificacao.NOME_TABELA+"("+DataBaseContract.Avaliacao._ID+"));";
+                    DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO+" int not null," +
+                    "FOREIGN KEY ("+ DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO+") REFERENCES "+ DataBaseContract.Avaliacao.NOME_TABELA+"("+DataBaseContract.Avaliacao._ID+"));";
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_TABLE_AVALIACAO);
-        db.execSQL(SQL_CREATE_TABLE_TIPO_NOTIFICACAO);
         db.execSQL(SQL_CREATE_TABLE_NOTIFICACAO);
     }
 

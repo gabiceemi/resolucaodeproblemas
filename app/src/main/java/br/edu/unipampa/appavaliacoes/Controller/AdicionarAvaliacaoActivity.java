@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -17,19 +18,22 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
+import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
 public class AdicionarAvaliacaoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public TextView data, horario, notificacao;
+    public TextView data, horario;
     private  int dia,mes,ano,hora,minutos;
     public Button salvar;
-    public EditText titulo, descricao;
+    public EditText titulo, descricao, mensagem;
     public ImageButton cancelar;
     public DataBasePersistencia dataBasePersistencia;
     public Avaliacao avaliacao;
-    public TextView dataNotificacao, horarioNotificacao, tipoNotificacao;
+    public Notificacao notificacao;
+    public TextView dataNotificacao, horarioNotificacao;
+    public Switch tipoSonoro, tipoLuminoso, tipoMensagem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +60,16 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
     public void localizarCampos(){
 
         titulo = findViewById(R.id.titulo_editar);
-        descricao = findViewById(R.id.descricao_editar);
-        data = findViewById(R.id.viewData_editar);
-        horario = findViewById(R.id.viewHora_editar);
+        descricao = findViewById(R.id.descricao);
+        data = findViewById(R.id.viewData);
+        horario = findViewById(R.id.viewHora);
 
-        tipoNotificacao = findViewById(R.id.switch_sonoro_editar);
+        tipoSonoro = findViewById(R.id.switch_sonoro);
+        tipoLuminoso = findViewById(R.id.switch_luminoso);
+        tipoMensagem = findViewById(R.id.switch_mensagem);
+
+        mensagem = findViewById(R.id.mensagem_notificacao);
+
         dataNotificacao = findViewById(R.id.viewData_notificacao_editar);
         horarioNotificacao = findViewById(R.id.viewHora_notificacao);
 
@@ -105,7 +114,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    data.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    dataNotificacao.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                 }
             }
                     , dia, mes, ano);
@@ -120,7 +129,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    horario.setText(hourOfDay + ":" + minute);
+                    horarioNotificacao.setText(hourOfDay + ":" + minute);
                 }
             }, hora, minutos, false);
             timePickerDialog.show();
@@ -132,7 +141,19 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             avaliacao.setDescricao(descricao.getText().toString());
             avaliacao.setDataDaAvaliacao(data.getText().toString());
             avaliacao.setHoraDaAvaliacao(horario.getText().toString());
-            dataBasePersistencia.insertAvalicao(avaliacao, -1);
+
+            notificacao.setData(dataNotificacao.getText().toString());
+            notificacao.setHora(horarioNotificacao.getText().toString());
+            if(tipoLuminoso.isChecked()){
+                notificacao.setTipoNotifi(1);
+            } else if(tipoSonoro.isChecked()){
+                notificacao.setTipoNotifi(2);
+            } else if(tipoMensagem.isChecked()){
+                notificacao.setTipoNotifi(3);
+                notificacao.setMenssagem(mensagem.getText().toString());
+            }
+
+            dataBasePersistencia.insert(avaliacao, notificacao);
 
             Toast.makeText(AdicionarAvaliacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);

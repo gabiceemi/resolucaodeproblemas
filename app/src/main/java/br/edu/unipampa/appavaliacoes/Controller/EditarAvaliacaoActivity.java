@@ -1,24 +1,11 @@
 package br.edu.unipampa.appavaliacoes.Controller;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
-import java.util.Calendar;
-
-import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.Model.Notificacao;
-import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
 public class EditarAvaliacaoActivity extends AppCompatActivity {
@@ -29,6 +16,9 @@ public class EditarAvaliacaoActivity extends AppCompatActivity {
     private String dataDaAvaliacao;
     private String horaDaAvaliacao;
     private Notificacao notification;
+    private int tipoNotifi;
+    private String dataNotificacao;
+    private String horarioNotificacao;
 
 
     @Override
@@ -44,6 +34,11 @@ public class EditarAvaliacaoActivity extends AppCompatActivity {
         dataDaAvaliacao = bundle.getString("data");
         horaDaAvaliacao = bundle.getString("hora");
 
+
+        tipoNotifi = bundle.putInt("tipoNotifi");
+        dataNotificacao = bundle.getString("dataNotificacao");
+        horarioNotificacao = bundle.getString("horarioNotificacao");
+
         visualizarDados();
     }
 
@@ -51,12 +46,18 @@ public class EditarAvaliacaoActivity extends AppCompatActivity {
     private void visualizarDados(){
         EditText textViewTitulo = findViewById(R.id.titulo_editar);
         textViewTitulo.setText(titulo_edit);
-        EditText textViewDescricao = findViewById(R.id.descricao_editar);
+        EditText textViewDescricao = findViewById(R.id.descricao);
         textViewDescricao.setText(descricao_edit);
-        TextView textViewData = (TextView) findViewById(R.id.viewData_editar);
+        TextView textViewData = (TextView) findViewById(R.id.viewData);
         textViewData.setText(dataDaAvaliacao);
-        TextView textViewHora = (TextView) findViewById(R.id.viewHora_editar);
+        TextView textViewHora = (TextView) findViewById(R.id.viewHora);
         textViewHora.setText(horaDaAvaliacao);
+
+        TextView textViewData_notificacao = (TextView) findViewById(R.id.viewData_notificacao_editar);
+        textViewData.setText(dataNotificacao);
+        TextView textViewHora_notificacac = (TextView) findViewById(R.id.viewHora_notificacao_editar);
+        textViewData.setText(horarioNotificacao);
+
     }
 
 }
