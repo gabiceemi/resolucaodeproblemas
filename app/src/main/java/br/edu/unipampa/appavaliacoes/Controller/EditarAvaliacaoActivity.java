@@ -15,6 +15,8 @@ import android.widget.TimePicker;
 
 import java.util.Calendar;
 
+import br.edu.unipampa.appavaliacoes.Model.Notificacao;
+import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 
 public class EditarAvaliacaoActivity extends AppCompatActivity implements View.OnClickListener {
@@ -38,11 +40,14 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
     public Button salvar;
     public ImageButton cancelar;
 
+    Notificacao notificacao;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_avaliacao);
+
         Bundle bundle;
         bundle = getIntent().getExtras();
 
@@ -71,6 +76,12 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
 
     }
 
+    private Notificacao puxarNotificacao(){
+        DataBasePersistencia db = new DataBasePersistencia(this);
+        notificacao = db.consultaNotificacao(id);
+        return notificacao;
+    }
+
     private void localizarCampos() {
         textViewTitulo = findViewById(R.id.titulo_editar);
         textViewDescricao = findViewById(R.id.descricao_editar);
@@ -86,6 +97,7 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
 
 
     private void apresentarDados(){
+        notificacao = puxarNotificacao();
         textViewTitulo.setText(titulo_edit);
         textViewDescricao.setText(descricao_edit);
         textViewData.setText(dataDaAvaliacao);

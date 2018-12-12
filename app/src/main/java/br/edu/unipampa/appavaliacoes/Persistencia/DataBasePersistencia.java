@@ -67,16 +67,12 @@ public class DataBasePersistencia {
         }
     }
 
-    public ArrayList<Avaliacao> consultaBase() {
+    public ArrayList<Avaliacao> consultaAvaliacao() {
 
         ArrayList<Avaliacao> avaliacaos = new ArrayList<>();
-        ArrayList<Notificacao> notificacaos = new ArrayList<>();
         Avaliacao avaliacao;
-        Notificacao notificacao;
 
         db = avaliacaoHelper.getReadableDatabase();
-
-        //Cursor c = db.rawQuery("SELECT * FROM Avaliacao INNER JOIN Notificacao on Notificacao.avaliacao == Avaliacao._id INNER JOIN   TipoNotificacao on Notificacao.tiponotificacao = TipoNotificacao._id", null);
 
         Cursor c = db.rawQuery("SELECT * FROM Avaliacao", null);
            if (c.moveToFirst()) {
@@ -91,16 +87,6 @@ public class DataBasePersistencia {
                     avaliacao = new Avaliacao(idAvaliacao, tituloAvaliacao, descricaoAvaliacao, dataAvaliacao, horaAvaliacao);
                     avaliacaos.add(avaliacao);
 
-                    /*
-                    int idNotificacao = c.getInt(5);
-                    String dataNotificacao = c.getString(6);
-                    String horaNotificacao = c.getString(7);
-                    String mensagemNotificao = c.getString(8);
-                    int idTipoNotificao = c.getInt(11);
-
-                    notificacao = new Notificacao(idNotificacao, dataNotificacao,horaNotificacao, mensagemNotificao, idTipoNotificao);
-                    notificacaos.add(notificacao);*/
-
                 } while (c.moveToNext());
             }
             c.close();
@@ -110,6 +96,32 @@ public class DataBasePersistencia {
         return avaliacaos;
 
 
+    }
+
+    public Notificacao consultaNotificacao(int id){
+
+        Notificacao notificacao = null;
+
+        db = avaliacaoHelper.getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM Notificacao INNER JOIN Avaliacao on Notificacao.avaliacao == " + id +"", null);
+
+        if (c.moveToFirst()) {
+            do {
+        int idNotificacao = c.getInt(0);
+        String dataNotificacao = c.getString(1);
+        String horaNotificacao = c.getString(2);
+        String mensagemNotificao = c.getString(3);
+        int idTipoNotificao = c.getInt(5);
+
+        notificacao = new Notificacao(idNotificacao, dataNotificacao, horaNotificacao, mensagemNotificao, idTipoNotificao);
+
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+
+        return notificacao;
     }
 
 

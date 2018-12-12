@@ -1,39 +1,16 @@
 package br.edu.unipampa.appavaliacoes.Controller;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import org.w3c.dom.ls.LSInput;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import br.edu.unipampa.appavaliacoes.Model.Notificacao;
-import br.edu.unipampa.appavaliacoes.Persistencia.AvaliacaoDBHelper;
-import br.edu.unipampa.appavaliacoes.Persistencia.DataBaseContract;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.R;
@@ -54,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public ArrayList<Avaliacao> carregaAvaliacao() {
         DataBasePersistencia db = new DataBasePersistencia(this);
-        return db.consultaBase();
+        return db.consultaAvaliacao();
 
     }
 
@@ -87,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bundle.putString("descricao", avaliacoes.get(position).getDescricao());
                 bundle.putString("data", avaliacoes.get(position).getHoraDaAvaliacao());
                 bundle.putString("hora", avaliacoes.get(position).getDataDaAvaliacao());
+
 
 
                 i.putExtras(bundle);
