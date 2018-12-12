@@ -12,8 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;

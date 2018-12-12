@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:id="@+id/cancelar_editar"
+            android:id="@+id/cancelar"
             android:layout_width="15dp"
             android:layout_height="14dp"
             android:layout_marginStart="27dp"
@@ -22,7 +22,7 @@
             app:srcCompat="@mipmap/cancel" />
 
         <Button
-            android:id="@+id/salvar_editar"
+            android:id="@+id/salvar"
             android:layout_width="117dp"
             android:layout_height="59dp"
             android:layout_marginTop="18dp"
@@ -36,7 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/titulo_editar"
+            android:id="@+id/titulo"
             style="@style/Base.Widget.MaterialComponents.TextInputEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/salvar_editar" />
+            app:layout_constraintTop_toBottomOf="@+id/salvar" />
 
         <ImageView
             android:id="@+id/clockView"
@@ -59,7 +59,7 @@
             android:layout_marginTop="30dp"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titulo_editar"
+            app:layout_constraintTop_toBottomOf="@+id/titulo"
             app:srcCompat="@mipmap/clock" />
 
         <TextView
@@ -72,10 +72,10 @@
             android:textColor="@color/colorPrimaryText"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titulo_editar" />
+            app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
         <TextView
-            android:id="@+id/viewData_notificacao_editar"
+            android:id="@+id/viewData_notificacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
@@ -95,7 +95,7 @@
             android:clickable="true"
             android:text="Hora"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/viewData_notificacao_editar"
+            app:layout_constraintStart_toEndOf="@+id/viewData_notificacao"
             app:layout_constraintTop_toBottomOf="@+id/textViewNotificacao_editar" />
 
         <TextView
@@ -134,13 +134,15 @@
 
         <TextView
             android:id="@+id/textViewNotificacao_editar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="374dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
             android:clickable="true"
             android:text="Notificação:"
             android:textSize="18sp"
-            tools:layout_editor_absoluteX="70dp"
-            tools:layout_editor_absoluteY="341dp" />
+            app:layout_constraintStart_toEndOf="@+id/alarmView"
+            app:layout_constraintTop_toBottomOf="@+id/descricao" />
 
         <ImageView
             android:id="@+id/viewText"
@@ -195,7 +197,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewData_notificacao_editar" />
+            app:layout_constraintTop_toBottomOf="@+id/viewData_notificacao" />
 
         <Switch
             android:id="@+id/switch_mensagem"

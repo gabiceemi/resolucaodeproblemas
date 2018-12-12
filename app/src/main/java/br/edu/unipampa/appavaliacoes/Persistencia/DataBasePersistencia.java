@@ -61,7 +61,6 @@ public class DataBasePersistencia {
 
             db.insert(DataBaseContract.Notificacao.NOME_TABELA, null, notifi);
 
-            System.out.print("deu certo");
             db.close();
         } catch (Exception e) {
             db.close();
@@ -96,12 +95,11 @@ public class DataBasePersistencia {
                     int idNotificacao = c.getInt(5);
                     String dataNotificacao = c.getString(6);
                     String horaNotificacao = c.getString(7);
-                    String mensagenNotificao = c.getString(8);
+                    String mensagemNotificao = c.getString(8);
                     int idTipoNotificao = c.getInt(11);
 
-                    notificacao = new Notificacao(idNotificacao, dataNotificacao,horaNotificacao,idTipoNotificao);
-                    notificacaos.add(notificacao);
-                    */
+                    notificacao = new Notificacao(idNotificacao, dataNotificacao,horaNotificacao, mensagemNotificao, idTipoNotificao);
+                    notificacaos.add(notificacao);*/
 
                 } while (c.moveToNext());
             }
@@ -213,7 +211,7 @@ public class DataBasePersistencia {
             values.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO,data);
             values.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, hora);
 
-            values.put(DataBaseContract.Notificacao.COLUNA_FK_TIPO_NOTIFICACAO, tipoNotifcacao);
+            values.put(DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO, tipoNotifcacao);
             db.update(DataBaseContract.Notificacao.NOME_TABELA, values, "_id = ?", new String[]{String.valueOf(id)});
 
             db.close();

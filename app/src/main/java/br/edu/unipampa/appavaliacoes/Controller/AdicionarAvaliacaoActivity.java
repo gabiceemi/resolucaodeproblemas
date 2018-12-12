@@ -41,11 +41,12 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
         setContentView(R.layout.activity_adicionar_avaliacao);
 
         avaliacao = new Avaliacao();
+        notificacao = new Notificacao();
         dataBasePersistencia = new DataBasePersistencia(this);
         localizarCampos();
 
-        salvar = findViewById(R.id.salvar_editar);
-        cancelar = findViewById(R.id.cancelar_editar);
+        salvar = findViewById(R.id.salvar);
+        cancelar = findViewById(R.id.cancelar);
 
 
         salvar.setOnClickListener(this);
@@ -59,7 +60,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
 
     public void localizarCampos(){
 
-        titulo = findViewById(R.id.titulo_editar);
+        titulo = findViewById(R.id.titulo);
         descricao = findViewById(R.id.descricao);
         data = findViewById(R.id.viewData);
         horario = findViewById(R.id.viewHora);
@@ -70,7 +71,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
 
         mensagem = findViewById(R.id.mensagem_notificacao);
 
-        dataNotificacao = findViewById(R.id.viewData_notificacao_editar);
+        dataNotificacao = findViewById(R.id.viewData_notificacao);
         horarioNotificacao = findViewById(R.id.viewHora_notificacao);
 
     }
@@ -153,12 +154,18 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
                 notificacao.setMenssagem(mensagem.getText().toString());
             }
 
-            dataBasePersistencia.insert(avaliacao, notificacao);
+            try {
 
-            Toast.makeText(AdicionarAvaliacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+                dataBasePersistencia.insert(avaliacao, notificacao);
+
+                Toast.makeText(AdicionarAvaliacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }catch (Exception e){
+                Toast.makeText(AdicionarAvaliacaoActivity.this, "Não foi possível salvar", Toast.LENGTH_SHORT).show();
+            }
 
         }
         if(v==cancelar){

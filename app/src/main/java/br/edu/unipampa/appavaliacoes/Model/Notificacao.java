@@ -10,7 +10,11 @@ public class Notificacao {
 	private int tipoNotifi;
 	private String mensagem;
 
-	public Notificacao() {
+	public Notificacao(){
+
+	}
+
+	public Notificacao(int idNotificacao, String dataNotificacao, String horaNotificacao, int idTipoNotificao) {
 
 		this.data = "";
 		this.hora = "00:00";
@@ -39,7 +43,7 @@ public class Notificacao {
         this.tipoNotifi = tipoNotifi;
         this.mensagem = mensagem;
     }
-    public  Notificacao(int id, int tipoNotifi) {
+    public  Notificacao(int id, String dataNotificacao, String horaNotificacao, String mensagemNotificao, int tipoNotifi) {
 
         this.id = id;
         this.tipoNotifi = tipoNotifi;
