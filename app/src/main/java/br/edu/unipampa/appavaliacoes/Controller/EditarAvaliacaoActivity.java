@@ -1,5 +1,6 @@
 package br.edu.unipampa.appavaliacoes.Controller;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -24,17 +25,18 @@ import br.edu.unipampa.appavaliacoes.R;
 
 public class EditarAvaliacaoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private int id, dia,mes,ano,hora,minutos;
+    private int id, idNotificacao, dia,mes,ano,hora,minutos;
     private String titulo_edit,descricao_edit,dataDaAvaliacao, horaDaAvaliacao;
     private EditText textViewTitulo, textViewDescricao, textoMensagem;
     private TextView textViewData, textViewHora, textViewDataNotificacao, textViewHoraNotificacao;
     private Switch luminoso, sonoro, mensagem;
     public Button salvar;
-    public ImageButton cancelar;
+    public ImageButton cancelar, deletar;
     public Avaliacao avaliacao;
     public Notificacao notificacao;
     public DataBasePersistencia db;
 
+    @SuppressLint("WrongViewCast")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +57,15 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
 
         salvar = findViewById(R.id.salvar_editar);
         cancelar = findViewById(R.id.cancelar_editar);
+        deletar = findViewById(R.id.deletar_editar);
+
         textViewHora.setOnClickListener(this);
         textViewData.setOnClickListener(this);
         textViewHoraNotificacao.setOnClickListener(this);
         textViewDataNotificacao.setOnClickListener(this);
         salvar.setOnClickListener(this);
         cancelar.setOnClickListener(this);
+        deletar.setOnClickListener(this);
 
     }
 
@@ -202,7 +207,23 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
         }
 
         if(v==cancelar){
+            Intent intent = new Intent(EditarAvaliacaoActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
+
+        }
+
+        if(v==deletar){
+            idNotificacao = notificacao.getId();
+            try {
+            db.deletAvaliacao(id, idNotificacao);
+                Toast.makeText(EditarAvaliacaoActivity.this, "Deletado com sucesso", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(EditarAvaliacaoActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }catch (Exception e){
+                Toast.makeText(EditarAvaliacaoActivity.this, "Não foi possível salvar", Toast.LENGTH_SHORT).show();
+            }
 
         }
 

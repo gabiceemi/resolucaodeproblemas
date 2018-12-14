@@ -168,6 +168,8 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
 
         }
         if(v==cancelar){
+            Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
 
         }
