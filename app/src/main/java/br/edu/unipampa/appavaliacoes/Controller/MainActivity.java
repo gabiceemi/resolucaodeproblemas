@@ -22,9 +22,9 @@ import java.util.Calendar;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.R;
-import br.edu.unipampa.appavaliacoes.Controller.NotificationChannel;
+
 import br.edu.unipampa.appavaliacoes.Controller.MainActivity;
-import br.edu.unipampa.appavaliacoes.Service.NotificationService;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,31 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adicionar = findViewById(R.id.adicionar);
         adicionar.setOnClickListener(this);
         apresentaAvaliacoes();
-        startService();
 
     }
-
-    private void startService() {
-
-        Intent serviceIntent = new Intent(this, NotificationService.class);
-            startService(serviceIntent);
-
-
-    }
-
-    public void stopService(){
-        Intent serviceIntent = new Intent(this, NotificationService.class);
-        stopService(serviceIntent);
-
-
-
-    }
-
-
-
-
-
-
 
 
     public ArrayList<Avaliacao> carregaAvaliacao() {
@@ -84,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void apresentaAvaliacoes() {
         avaliacoes = carregaAvaliacao();
+
+
 
         ListView listView = (ListView) findViewById(R.id.listView);
         ListAdapterAvaliacao adapterAvaliacao = new ListAdapterAvaliacao(getBaseContext(), avaliacoes);
