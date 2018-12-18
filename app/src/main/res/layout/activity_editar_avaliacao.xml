@@ -45,6 +45,7 @@
             android:layout_marginEnd="8dp"
             android:backgroundTint="@android:color/transparent"
             android:hint="Insira o título"
+            android:inputType="text"
             android:textColor="@color/colorPrimaryText"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"

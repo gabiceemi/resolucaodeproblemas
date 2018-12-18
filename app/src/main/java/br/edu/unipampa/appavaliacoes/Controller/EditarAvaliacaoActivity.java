@@ -89,6 +89,7 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
     private void apresentarDados(){
         notificacao = db.consultaNotificacao(id);
         textViewTitulo.setText(titulo_edit);
+
         textViewDescricao.setText(descricao_edit);
         textViewData.setText(dataDaAvaliacao);
         textViewHora.setText(horaDaAvaliacao);
@@ -168,7 +169,7 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
         }
         if(v==salvar){
             textViewTitulo = findViewById(R.id.titulo_editar);
-            Log.i("info", "onClick: "+ textViewTitulo);
+            Log.i("info", "onClick: "+ textViewTitulo.getText().toString());
             textViewDescricao = findViewById(R.id.descricao_editar);
             textViewData = findViewById(R.id.viewData_editar);
             textViewHora = findViewById(R.id.viewHora_editar);
@@ -179,10 +180,15 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
             mensagem = findViewById(R.id.switch_mensagem_editar);
             textoMensagem = findViewById(R.id.mensagem_notificacao_editar);
 
+
+            avaliacao = new Avaliacao();
+            avaliacao.setId(id);
             avaliacao.setTitulo(textViewTitulo.getText().toString());
             avaliacao.setDescricao(textViewDescricao.getText().toString());
             avaliacao.setDataDaAvaliacao(textViewData.getText().toString());
             avaliacao.setHoraDaAvaliacao(textViewHora.getText().toString());
+
+            Log.i("info", "onClick: " + notificacao.getId() +  " idavalicao" + avaliacao.getId());
 
             notificacao.setData(textViewDataNotificacao.getText().toString());
             notificacao.setHora(textViewHoraNotificacao.getText().toString());

@@ -77,10 +77,19 @@ public class NotificationController {
         mBuilder.setContentText(notificacao.getMenssagem());
         mBuilder.setDefaults(android.app.Notification.DEFAULT_ALL);
 
+
+        /**
+         * Fragament para cancelar
+         */
+
+
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent notificacaoIntent = PendingIntent.getActivity(context, notificacaioId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         mBuilder.setContentIntent(notificacaoIntent);
         mBuilder.setAutoCancel(true);
+
+
+
         if (isAgora) {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
                 mNotificationManager.notify(notificacao.getId(), mBuilder.build());
