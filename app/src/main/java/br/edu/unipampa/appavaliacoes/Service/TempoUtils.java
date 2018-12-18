@@ -18,7 +18,7 @@ public class TempoUtils {
         long a = 0;
 
 
-        if(notificacao.getId()!= -1){
+        if(notificacao != null){
         String date = notificacao.getData()+" "+notificacao.getHora();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");

@@ -131,17 +131,19 @@ public class NotificationController {
 
 
     public void cancelarNotificacao(Notificacao a) {
-        int id = a.getId();
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context.getApplicationContext(), AlarmReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(context.getApplicationContext(), id, intent, 0);
-        alarmManager.cancel(alarmIntent);
+       if(a != null) {
 
-        Log.i("info", "cancelarNotificacao:  Aqui rodou");
+           int id = a.getId();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            new NotificationReceiver().removerJob(a, context, this);
-        }
+           AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+           Intent intent = new Intent(context.getApplicationContext(), AlarmReceiver.class);
+           PendingIntent alarmIntent = PendingIntent.getBroadcast(context.getApplicationContext(), id, intent, 0);
+           alarmManager.cancel(alarmIntent);
+
+           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+               new NotificationReceiver().removerJob(a, context, this);
+           }
+       }
     }
 
 
