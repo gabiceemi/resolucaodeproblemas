@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(no!=null) {
 
             //new TempoUtils().millisTempoNotificacao(no);
-            //new NotificationController(this).agendarNotificacao(carregaNotificacao().get(0));
+            new NotificationController(this).agendarNotificacao(carregaNotificacao().get(0));
             Log.i("info", "onCreate: looper");
         }
 

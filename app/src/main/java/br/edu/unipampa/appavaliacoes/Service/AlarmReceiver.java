@@ -15,13 +15,16 @@ import java.util.concurrent.TimeUnit;
 
 import br.edu.unipampa.appavaliacoes.Controller.NotificationController;
 import br.edu.unipampa.appavaliacoes.Model.Notificacao;
+import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
     public static String NOTIFICATION = "Notitification_id";
+    public DataBasePersistencia db;
 
     @Override
     public void onReceive(final Context context, Intent intent) {
+        int id_notificacao_cancel = intent.getIntExtra("id_Notificacao",-1);
         if (!isBoot(context, intent)) { // se não é boot é porque está na hora de despertar
             NotificationController notification = new NotificationController(context);
             int id = intent.getIntExtra(NOTIFICATION, -1);
@@ -33,6 +36,20 @@ public class AlarmReceiver extends BroadcastReceiver {
             }
 
         }
+        if(id_notificacao_cancel>-1){
+
+            Log.i("info", "onReceive: "+ id_notificacao_cancel + "Chegou aki");
+
+            NotificationController notificationController = new NotificationController(context);
+            db = new DataBasePersistencia(context);
+            Notificacao cancelNotification  =  db.consultaNotificacao(id_notificacao_cancel);
+
+            Log.i("info", "onReceive: "+ cancelNotification.getId() + "Chegou aki");
+
+            notificationController.cancelarNotificacao(cancelNotification);
+
+        }
+
         
     }
 

@@ -51,7 +51,14 @@ public class NotificationController {
     public android.app.Notification.Builder prepararnotificacao(Notificacao notificacao, boolean isAgora) {
         int notificacaioId = notificacao.getId();
         android.app.Notification.Builder mBuilder;
+
+        /**
+         * Cancelar passando dado para AlarmReceiver
+         */
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        Intent intentCancel = new Intent(context.getApplicationContext(), AlarmReceiver.class);
+        intentCancel.putExtra("id_Notificacao", notificacaioId);
+        PendingIntent actionIntent = PendingIntent.getBroadcast(context.getApplicationContext(),0, intentCancel, PendingIntent.FLAG_UPDATE_CURRENT);
 
         // Inicializar channel para Oreo
         String CHANNEL_ID = context.getResources().getString(R.string.app_name);
@@ -65,27 +72,21 @@ public class NotificationController {
         }
         mBuilder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.books));
         mBuilder.setSmallIcon(R.mipmap.books);
+        mBuilder.setTicker("Notificação");
+        mBuilder.setContentTitle("Notificação");
+        mBuilder.setContentText(notificacao.getMenssagem());
+        mBuilder.addAction(R.mipmap.ic, "Cancel", actionIntent);
+        mBuilder.setOnlyAlertOnce(true);
 
         mBuilder.setContentTitle(notificacao.getMenssagem());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mBuilder.setColor(context.getResources().getColor(R.color.colorPrimaryDark));
+            mBuilder.setColor(context.getResources().getColor(R.color.colorPrimary));
             mBuilder.setVisibility(android.app.Notification.VISIBILITY_PUBLIC);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mBuilder.setBadgeIconType(android.app.Notification.BADGE_ICON_SMALL);
         }
-        mBuilder.setContentText(notificacao.getMenssagem());
         mBuilder.setDefaults(android.app.Notification.DEFAULT_ALL);
-
-
-        /**
-         * Fragament para cancelar
-         */
-
-
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent notificacaoIntent = PendingIntent.getActivity(context, notificacaioId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        mBuilder.setContentIntent(notificacaoIntent);
         mBuilder.setAutoCancel(true);
 
 
@@ -105,25 +106,25 @@ public class NotificationController {
 
     public void prepararNotificacoes() {
         AlarmReceiver alarmReceiver = new AlarmReceiver();
-        // agenda todas as notificações
+
         for (Notificacao notificacao : db.consultaNotifition()) {
             alarmReceiver.agendarAlarme(notificacao, context);
         }
 
-        // prepara o job que irá garantir a chamada da próxima aula
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // agenda o job apenas se o horário for novo for antes do antigo job
+
             new NotificationReceiver().agendarProximoJob(this, context);
         }
     }
 
 
     public void agendarNotificacao(@NonNull Notificacao a) {
-        new AlarmReceiver().agendarAlarme(a, context); // agenda alarme independente da versão do android
+        new AlarmReceiver().agendarAlarme(a, context);
 
-        // prepara o job que irá garantir a chamada da próxima aula
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            // agenda o job apenas se o horário for novo for antes do antigo job
+
             new  NotificationReceiver().agendarProximoJob(this, context);
         }
     }
@@ -135,6 +136,8 @@ public class NotificationController {
         Intent intent = new Intent(context.getApplicationContext(), AlarmReceiver.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context.getApplicationContext(), id, intent, 0);
         alarmManager.cancel(alarmIntent);
+
+        Log.i("info", "cancelarNotificacao:  Aqui rodou");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             new NotificationReceiver().removerJob(a, context, this);
@@ -151,7 +154,7 @@ public class NotificationController {
         long notTemp;
         for (Notificacao tempAula : proxNotificacao) {
             notTemp = TempoUtils.millisTempoNotificacao(tempAula);
-            if (notTemp < notProxAula) { // encontrou uma mais próxima
+            if (notTemp < notProxAula) {
                 prox = tempAula;
                 notProxAula = notTemp;
             }
@@ -165,15 +168,15 @@ public class NotificationController {
 
         long notAulaAnterior = TempoUtils.millisTempoNotificacao(Anterior);
 
-        Notificacao prox = null; // inicializa aleatoriamente
+        Notificacao prox = null;
         long notProxAula = Long.MAX_VALUE;
 
         long notTemp;
         for (Notificacao tempProx : atividadeNotificacao) {
             notTemp = TempoUtils.millisTempoNotificacao(tempProx);
 
-            if (notTemp < notProxAula) { // encontrou uma mais próxima
-                if (notAulaAnterior < notTemp) { // a próxima deve ser depois da aula anterior
+            if (notTemp < notProxAula) {
+                if (notAulaAnterior < notTemp) {
                     prox = tempProx;
                     notProxAula = notTemp;
                 }

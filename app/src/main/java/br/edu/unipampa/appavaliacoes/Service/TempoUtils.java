@@ -17,6 +17,8 @@ public class TempoUtils {
     public static long millisTempoNotificacao(Notificacao notificacao) {
         long a = 0;
 
+
+        if(notificacao.getId()!= -1){
         String date = notificacao.getData()+" "+notificacao.getHora();
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -32,6 +34,8 @@ public class TempoUtils {
 
         Log.i("info", "millisTempoNotificacao: " + dateMili.getTime() );
         return  dateMili.getTime();
+        }
+        return 0;
     }
 
 
