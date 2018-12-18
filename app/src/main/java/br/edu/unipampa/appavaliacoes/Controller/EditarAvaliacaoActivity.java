@@ -6,11 +6,13 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -31,7 +33,8 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
     private TextView textViewData, textViewHora, textViewDataNotificacao, textViewHoraNotificacao;
     private Switch luminoso, sonoro, mensagem;
     public Button salvar;
-    public ImageButton cancelar, deletar;
+    private ImageView deletar;
+    public ImageButton cancelar;
     public Avaliacao avaliacao;
     public Notificacao notificacao;
     public DataBasePersistencia db;
@@ -57,7 +60,7 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
 
         salvar = findViewById(R.id.salvar_editar);
         cancelar = findViewById(R.id.cancelar_editar);
-        deletar = findViewById(R.id.deletar_editar);
+        deletar = findViewById(R.id.deleta_editar);
 
         textViewHora.setOnClickListener(this);
         textViewData.setOnClickListener(this);
@@ -165,6 +168,7 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
         }
         if(v==salvar){
             textViewTitulo = findViewById(R.id.titulo_editar);
+            Log.i("info", "onClick: "+ textViewTitulo);
             textViewDescricao = findViewById(R.id.descricao_editar);
             textViewData = findViewById(R.id.viewData_editar);
             textViewHora = findViewById(R.id.viewHora_editar);

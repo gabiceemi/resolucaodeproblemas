@@ -39,29 +39,20 @@ public class NotificationReceiver extends JobService {
 		return true;
 	}
 
-	/**
-	 * Agenda o job apenas se o horário for novo for antes do antigo job
-	 *
-	 * @param when
-	 */
+
 	private void agendarJob(long when, Context context) {
 		when -= TEMPO_FOLGA;
 		ComponentName serviceComponent = new ComponentName(context.getPackageName(), NotificationReceiver.class.getName());
 		JobInfo.Builder builder = new JobInfo.Builder(0, serviceComponent);
 		builder.setOverrideDeadline(when);
-		builder.setPersisted(true); // persistir o trabalho durante a inicialização
-		// builder.setMinimumLatency(TimeUnit.MINUTES.toMillis(1));
+		builder.setPersisted(true);
 
 		JobScheduler jobScheduler = getJobScheduler(context);
 		jobScheduler.schedule(builder.build());
 	}
 
-	/**
-	 * Busca a próxima aula a ser notificada e agenda o job
-	 *
-	 * @param controller
-	 * @param context
-	 */
+
+
 	public void agendarProximoJob(NotificationController controller, Context context) {
 		Notificacao proxima = controller.getProximaNotificacao();
 		long when = TempoUtils.millisTempoNotificacao(proxima);
@@ -118,7 +109,7 @@ public class NotificationReceiver extends JobService {
 		protected JobParameters doInBackground(JobParameters... params) {
 			Context context = getApplicationContext();
 
-			// aciona o alarme da próxima aula
+
 			NotificationController ctlNotificacao = new NotificationController(context);
 			Notificacao proxima = acionarProximoAlarme(context, ctlNotificacao);
 			agendarJobSeguinte(proxima, context, ctlNotificacao);

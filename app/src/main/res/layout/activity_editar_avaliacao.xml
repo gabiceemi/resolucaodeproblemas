@@ -227,7 +227,7 @@
             app:layout_constraintTop_toBottomOf="@+id/switch_luminoso_editar" />
 
         <ImageView
-            android:id="@+id/deletar_editar"
+            android:id="@+id/deleta_editar"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="35dp"

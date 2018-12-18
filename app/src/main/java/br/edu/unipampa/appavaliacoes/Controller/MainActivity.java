@@ -1,9 +1,7 @@
 package br.edu.unipampa.appavaliacoes.Controller;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Context;
+
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -17,19 +15,20 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
+import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.R;
 
-import br.edu.unipampa.appavaliacoes.Controller.MainActivity;
+
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public FloatingActionButton adicionar;
     public ArrayList<Avaliacao> avaliacoes = new ArrayList<>();
+    NotificationController notificao = new NotificationController(this);
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -40,8 +39,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adicionar.setOnClickListener(this);
         apresentaAvaliacoes();
 
+        //new NotificationController(this).agendarNotificacao(carregaNotificacao().get(0));
+
+
     }
 
+
+
+    public void alarme(ArrayList<Notificacao> no){
+
+        new NotificationController(this).showNotificacao(no.get(0).getId());
+    }
+
+    public ArrayList<Notificacao> carregaNotificacao() {
+        DataBasePersistencia db = new DataBasePersistencia(this);
+        return db.consultaNotifition();
+
+    }
 
     public ArrayList<Avaliacao> carregaAvaliacao() {
         DataBasePersistencia db = new DataBasePersistencia(this);
@@ -61,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void apresentaAvaliacoes() {
         avaliacoes = carregaAvaliacao();
-
 
 
         ListView listView = (ListView) findViewById(R.id.listView);
@@ -85,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 i.putExtras(bundle);
 
                 startActivity(i);
+                Log.i("info", "onItemClick: Teste de click");
                 finish();
             }
         });

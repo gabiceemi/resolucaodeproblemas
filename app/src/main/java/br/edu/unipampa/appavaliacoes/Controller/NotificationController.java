@@ -12,12 +12,12 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.R;
 import br.edu.unipampa.appavaliacoes.Service.AlarmReceiver;
 import br.edu.unipampa.appavaliacoes.Service.NotificationReceiver;
+import br.edu.unipampa.appavaliacoes.Service.TempoUtils;
 
 public class NotificationController {
 
@@ -94,9 +94,9 @@ public class NotificationController {
 
     public void prepararNotificacoes() {
         AlarmReceiver alarmReceiver = new AlarmReceiver();
-        // agenda todas as notificações de aula
+        // agenda todas as notificações
         for (Notificacao notificacao : db.consultaNotifition()) {
-            alarmReceiver.agendarAlarme(notificacao, context); // agenda alarme independente da versão do android
+            alarmReceiver.agendarAlarme(notificacao, context);
         }
 
         // prepara o job que irá garantir a chamada da próxima aula
