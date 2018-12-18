@@ -20,8 +20,7 @@ import br.edu.unipampa.appavaliacoes.Model.Notificacao;
 import br.edu.unipampa.appavaliacoes.Persistencia.DataBasePersistencia;
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.R;
-
-
+import br.edu.unipampa.appavaliacoes.Service.TempoUtils;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -39,16 +38,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adicionar.setOnClickListener(this);
         apresentaAvaliacoes();
 
-        //new NotificationController(this).agendarNotificacao(carregaNotificacao().get(0));
+
+        Notificacao no = criarNotificacao(carregaNotificacao());
+        if(no!=null) {
+
+            //new TempoUtils().millisTempoNotificacao(no);
+            //new NotificationController(this).agendarNotificacao(carregaNotificacao().get(0));
+            Log.i("info", "onCreate: looper");
+        }
 
 
     }
 
 
 
-    public void alarme(ArrayList<Notificacao> no){
+    public Notificacao criarNotificacao(ArrayList<Notificacao> no){
 
-        new NotificationController(this).showNotificacao(no.get(0).getId());
+        if(no.size()>0){
+
+            return no.get(0);
+
+        }
+        return null;
     }
 
     public ArrayList<Notificacao> carregaNotificacao() {

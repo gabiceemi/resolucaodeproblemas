@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +25,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         if (!isBoot(context, intent)) { // se não é boot é porque está na hora de despertar
             NotificationController notification = new NotificationController(context);
             int id = intent.getIntExtra(NOTIFICATION, -1);
+            Log.i("Info", "onReceive: ID" + id);
             if (id > -1) {
                 notification.showNotificacao(id);
             } else {
@@ -51,14 +53,14 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
     public void agendarAlarme(@NonNull Notificacao notificacao, Context context) {
-        // Enable a receiver
+
         ComponentName receiver = new ComponentName(context, AlarmReceiver.class);
         PackageManager pm = context.getPackageManager();
         pm.setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
 
-        int notificationId = notificacao.getId();/////
+        int notificationId = notificacao.getId();
 
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra(AlarmReceiver.NOTIFICATION, notificationId);
@@ -79,7 +81,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         } else {
             alarmMgr.set(AlarmManager.RTC_WAKEUP, tempo, alarmIntent);
         }
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, tempo, TimeUnit.DAYS.toMillis(7), alarmIntent); // repetir a cada 7 dias
+        //alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, tempo, TimeUnit.DAYS.toMillis(7), alarmIntent); // repetir a cada 7 dias
     }
     
     

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class NotificationController {
 
     public void showNotificacao(int id) {
         for (Notificacao ava : db.consultaNotifition()) {
+            Log.i("info", "showNotificacao: Notificacao" + ava.toString());
             if (ava.getId() == id) {
                 prepararnotificacao(ava, true);
             }
