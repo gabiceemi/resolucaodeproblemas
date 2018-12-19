@@ -75,6 +75,7 @@ public class NotificationController {
         mBuilder.setTicker("Notificação");
         mBuilder.setContentTitle("Notificação");
         mBuilder.setContentText(notificacao.getMenssagem());
+        mBuilder.setContentIntent(actionIntent);
         mBuilder.addAction(R.mipmap.ic, "Cancel", actionIntent);
         mBuilder.setOnlyAlertOnce(true);
 
