@@ -39,15 +39,18 @@ public class DataBasePersistencia {
             long idAvaliacao = db.insert(DataBaseContract.Avaliacao.NOME_TABELA, null, values);
             avaliacao.setId(idAvaliacao);
 
-            ContentValues notifi = new ContentValues();
+            if(notificacao != null) {
 
-            notifi.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO, notificacao.getData());
-            notifi.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, notificacao.getHora());
-            notifi.put(DataBaseContract.Notificacao.COLUNA_MENSAGEM, notificacao.getMenssagem());
-            notifi.put(DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO, idAvaliacao);
-            notifi.put(DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO, notificacao.getTipoNotifi());
+                ContentValues notifi = new ContentValues();
 
-            db.insert(DataBaseContract.Notificacao.NOME_TABELA, null, notifi);
+                notifi.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO, notificacao.getData());
+                notifi.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, notificacao.getHora());
+                notifi.put(DataBaseContract.Notificacao.COLUNA_MENSAGEM, notificacao.getMenssagem());
+                notifi.put(DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO, idAvaliacao);
+                notifi.put(DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO, notificacao.getTipoNotifi());
+
+                db.insert(DataBaseContract.Notificacao.NOME_TABELA, null, notifi);
+            }
 
             db.close();
         } catch (Exception e) {
@@ -133,11 +136,14 @@ public class DataBasePersistencia {
             values.put(DataBaseContract.Avaliacao.COLUNA_HORARIO, avaliacao.getHoraDaAvaliacao());
             db.update(DataBaseContract.Avaliacao.NOME_TABELA, values, "_id = ?", new String[]{String.valueOf(avaliacao.getId())});
 
-            values.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO, notificacao.getData());
-            values.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, notificacao.getHora());
+            ContentValues notifi = new ContentValues();
 
-            values.put(DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO, notificacao.getTipoNotifi());
-            db.update(DataBaseContract.Notificacao.NOME_TABELA, values, "_id = ?", new String[]{String.valueOf(notificacao.getId())});
+            notifi.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO, notificacao.getData());
+            notifi.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, notificacao.getHora());
+            notifi.put(DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO, notificacao.getTipoNotifi());
+            notifi.put(DataBaseContract.Notificacao.COLUNA_MENSAGEM, notificacao.getMenssagem());
+
+            db.update(DataBaseContract.Notificacao.NOME_TABELA, notifi, "_id = ?", new String[]{String.valueOf(notificacao.getId())});
 
             db.close();
         } catch (Exception e) {

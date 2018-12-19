@@ -229,18 +229,16 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
                 idNotificacao = notificacao.getId();
                 try {
 
-
                     db.deletAvaliacao(id, idNotificacao);
 
                     Toast.makeText(EditarAvaliacaoActivity.this, "Deletado com sucesso", Toast.LENGTH_SHORT).show();
                     NotificationController nController = new NotificationController(this);
                     nController.cancelarNotificacao(notificacao);
-                    Toast.makeText(EditarAvaliacaoActivity.this, "Alarme deletado com sucesso", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(EditarAvaliacaoActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (Exception e) {
-                    Toast.makeText(EditarAvaliacaoActivity.this, "Não foi possível salvar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditarAvaliacaoActivity.this, "Não foi possível deletar", Toast.LENGTH_SHORT).show();
                 }
             }
 

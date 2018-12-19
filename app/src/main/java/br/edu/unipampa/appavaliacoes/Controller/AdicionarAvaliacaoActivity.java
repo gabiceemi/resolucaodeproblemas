@@ -33,6 +33,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
     public Avaliacao avaliacao;
     public Notificacao notificacao;
     public Switch tipoSonoro, tipoLuminoso, tipoMensagem;
+    public boolean camposPreenchidos = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,7 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             mes=c.get(Calendar.MONTH);
             ano=c.get(Calendar.YEAR);
 
+
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -110,6 +112,9 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
             dia = c.get(Calendar.DAY_OF_MONTH);
             mes = c.get(Calendar.MONTH);
             ano = c.get(Calendar.YEAR);
+            c.set(Calendar.YEAR, 2018);
+            c.set(Calendar.MONTH, Calendar.DECEMBER);
+            c.set(Calendar.DAY_OF_MONTH, 19);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
@@ -136,42 +141,54 @@ public class AdicionarAvaliacaoActivity extends AppCompatActivity implements Vie
 
         }
         if(v==salvar){
+            isValida();
 
-            avaliacao.setTitulo(titulo.getText().toString());
-            avaliacao.setDescricao(descricao.getText().toString());
-            avaliacao.setDataDaAvaliacao(data.getText().toString());
-            avaliacao.setHoraDaAvaliacao(horario.getText().toString());
+            if(camposPreenchidos == true) {
 
-            notificacao.setData(dataNotificacao.getText().toString());
-            notificacao.setHora(horarioNotificacao.getText().toString());
-            if(tipoLuminoso.isChecked()){
-                notificacao.setTipoNotifi(1);
-            } else if(tipoSonoro.isChecked()){
-                notificacao.setTipoNotifi(2);
-            } else if(tipoMensagem.isChecked()){
-                notificacao.setTipoNotifi(3);
-                notificacao.setMenssagem(mensagem.getText().toString());
+                avaliacao.setTitulo(titulo.getText().toString());
+                avaliacao.setDescricao(descricao.getText().toString());
+                avaliacao.setDataDaAvaliacao(data.getText().toString());
+                avaliacao.setHoraDaAvaliacao(horario.getText().toString());
+
+                notificacao.setData(dataNotificacao.getText().toString());
+                notificacao.setHora(horarioNotificacao.getText().toString());
+                if (tipoLuminoso.isChecked()) {
+                    notificacao.setTipoNotifi(1);
+                } else if (tipoSonoro.isChecked()) {
+                    notificacao.setTipoNotifi(2);
+                } else if (tipoMensagem.isChecked()) {
+                    notificacao.setTipoNotifi(3);
+                    notificacao.setMenssagem(mensagem.getText().toString());
+                }
+
+                try {
+
+                    dataBasePersistencia.insert(avaliacao, notificacao);
+
+                    Toast.makeText(AdicionarAvaliacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                } catch (Exception e) {
+                    Toast.makeText(AdicionarAvaliacaoActivity.this, "Não foi possível salvar", Toast.LENGTH_SHORT).show();
+                }
             }
-
-            try {
-
-                dataBasePersistencia.insert(avaliacao, notificacao);
-
-                Toast.makeText(AdicionarAvaliacaoActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-
-            }catch (Exception e){
-                Toast.makeText(AdicionarAvaliacaoActivity.this, "Não foi possível salvar", Toast.LENGTH_SHORT).show();
-            }
-
         }
         if(v==cancelar){
             Intent intent = new Intent(AdicionarAvaliacaoActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
 
+        }
+    }
+
+    public void isValida(){
+
+        if(titulo.getText().toString() == null || descricao.getText().toString() == null ||
+                data.getText().toString() == null || horario.getText().toString() == null){
+            Toast.makeText(AdicionarAvaliacaoActivity.this, "Preencha todos os campos obrigatórios", Toast.LENGTH_SHORT).show();
+            camposPreenchidos = false;
         }
     }
 }

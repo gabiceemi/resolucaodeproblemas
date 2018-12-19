@@ -36,8 +36,8 @@ public class AvaliacaoDBHelper extends SQLiteOpenHelper {
                     DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO+ " TEXT, "+
                     DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO+ " TEXT, "+
                     DataBaseContract.Notificacao.COLUNA_MENSAGEM+ " TEXT, "+
-                    DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO+" int not null," +
-                    DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO+" int not null," +
+                    DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO+" int," +
+                    DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO+" int," +
                     "FOREIGN KEY ("+ DataBaseContract.Notificacao.COLUNA_FK_AVALIACAO+") REFERENCES "+ DataBaseContract.Avaliacao.NOME_TABELA+"("+DataBaseContract.Avaliacao._ID+"));";
 
 
