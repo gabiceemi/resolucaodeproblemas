@@ -21,8 +21,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Service.NotificationReceiver" />
-        <activity android:name=".Controller.NotificationChannel" />
+        <activity android:name=".Service.NotificationReceiver">
+
+
+        </activity>
+        <activity android:name=".Controller.NotificationChannel">
+
+            <intent-filter>
+                <action android:name="ALARME_ATIVO"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+             </intent-filter>
+        </activity>
         <activity
             android:name=".Controller.AdicionarAvaliacaoActivity"
             android:label="Adicionar Avaliação" />
@@ -30,6 +39,9 @@
         <activity
             android:name=".Controller.EditarAvaliacaoActivity"
             android:label="Editar Avaliação" />
+
+        <service android:name=".Service.NotificationService"/>
     </application>
+
 
 </manifest>

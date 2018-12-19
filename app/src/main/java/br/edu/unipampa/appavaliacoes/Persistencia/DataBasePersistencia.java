@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import br.edu.unipampa.appavaliacoes.Model.Avaliacao;
 import br.edu.unipampa.appavaliacoes.Model.Notificacao;
@@ -160,4 +162,41 @@ public class DataBasePersistencia {
 
         }
     }
+
+
+    public ArrayList<Notificacao> consultaNotifition(){
+
+
+        Calendar hoje = Calendar.getInstance();
+        String data =  hoje.get(hoje.DAY_OF_MONTH)+"/"+ hoje.get(hoje.MONTH)+ "/"+hoje.get(hoje.YEAR);
+
+
+        ArrayList<Notificacao> notifi = new ArrayList<>();
+        Notificacao notificacao = new Notificacao();
+
+        db = avaliacaoHelper.getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM Notificacao WHERE Notificacao.datanotificacao >=" + data+" ORDER by Notificacao.datanotificacao,Notificacao.horarionotificacao", null);
+
+        if (c.moveToFirst()) {
+            do {
+                int idNotificacao = c.getInt(0);
+                String dataNotificacao = c.getString(1);
+                String horaNotificacao = c.getString(2);
+                String mensagemNotificao = c.getString(3);
+                int idTipoNotificao = c.getInt(5);
+
+                notificacao = new Notificacao(idNotificacao, dataNotificacao, horaNotificacao, mensagemNotificao, idTipoNotificao);
+                notifi.add(notificacao);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        db.close();
+
+        return notifi;
+    }
+
+
+
 }

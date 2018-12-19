@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -29,39 +30,16 @@ public class NotificationChannel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         notifitionManager = NotificationManagerCompat.from(this);
-
         text = findViewById(R.id.text_tittle);
         msn = findViewById(R.id.message);
 
+
+        sendOnChannelTest();
+        Log.i("Notificacao", "onCreate: Acordou, disparou? ");
+
+
     }
 
-
-
-
-    public void enviaDados(int id){
-
-       Avaliacao avaliacao = new Avaliacao();
-       Notificacao notifica = new Notificacao();
-
-       DataBasePersistencia db = new DataBasePersistencia(this);
-            avaliacao = db.consultaBaseAvalicao(id);
-           // notifica = db.consultaBaseNotifica();
-
-
-       Intent i = new Intent(getBaseContext(), EditarAvaliacaoActivity.class);
-        Bundle bundle = new Bundle();
-
-        bundle.putInt("id", (int) avaliacao.getId());
-        bundle.putString("titulo", avaliacao.getTitulo());
-        bundle.putString("descricao", avaliacao.getDescricao());
-        bundle.putString("data", avaliacao.getHoraDaAvaliacao());
-        bundle.putString("hora", avaliacao.getDataDaAvaliacao());
-        i.putExtras(bundle);
-
-        startActivity(i);
-        finish();
-
-    }
 
     public void notifica(View view){
         /*
@@ -180,8 +158,14 @@ public class NotificationChannel extends AppCompatActivity {
      */
 
     public void sendOnChannel(View view){
-        String title = text.getText().toString();
-        String menssagem = msn.getText().toString();
+        sendOnChannelTest();
+    }
+
+
+
+    public void sendOnChannelTest(){
+        String title = "TesteNotificação";
+        String menssagem = "TesteOk";
         Intent intentNotification = new Intent (this,EditarAvaliacaoActivity.class);
         Intent intent = new Intent (this,AdicionarAvaliacaoActivity.class);
         PendingIntent actionIntent = PendingIntent.getActivity(this,0, intentNotification,0);

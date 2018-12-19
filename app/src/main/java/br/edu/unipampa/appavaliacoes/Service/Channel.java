@@ -7,7 +7,7 @@ import android.os.Build;
 
 public class Channel extends Application {
 
-    public static final String CHANNEL_1_ID = "Channel_1";
+    public static final String CHANNEL_1_ID = "Channel_Notification";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -22,7 +22,7 @@ public class Channel extends Application {
 
             NotificationChannel channel1 = new NotificationChannel(
                     CHANNEL_1_ID,
-                    "Channel 1",
+                    "Channel Notification",
                     NotificationManager.IMPORTANCE_HIGH
 
             );
