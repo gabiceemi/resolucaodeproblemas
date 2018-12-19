@@ -6,11 +6,13 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -25,13 +27,14 @@ import br.edu.unipampa.appavaliacoes.R;
 
 public class EditarAvaliacaoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private int id, idNotificacao, dia,mes,ano,hora,minutos;
-    private String titulo_edit,descricao_edit,dataDaAvaliacao, horaDaAvaliacao;
+    private int id, idNotificacao, dia, mes, ano, hora, minutos;
+    private String titulo_edit, descricao_edit, dataDaAvaliacao, horaDaAvaliacao;
     private EditText textViewTitulo, textViewDescricao, textoMensagem;
     private TextView textViewData, textViewHora, textViewDataNotificacao, textViewHoraNotificacao;
     private Switch luminoso, sonoro, mensagem;
     public Button salvar;
-    public ImageButton cancelar, deletar;
+    private ImageView deletar;
+    public ImageButton cancelar;
     public Avaliacao avaliacao;
     public Notificacao notificacao;
     public DataBasePersistencia db;
@@ -57,7 +60,7 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
 
         salvar = findViewById(R.id.salvar_editar);
         cancelar = findViewById(R.id.cancelar_editar);
-        deletar = findViewById(R.id.deletar_editar);
+        deletar = findViewById(R.id.deleta_editar);
 
         textViewHora.setOnClickListener(this);
         textViewData.setOnClickListener(this);
@@ -83,19 +86,20 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
     }
 
 
-    private void apresentarDados(){
+    private void apresentarDados() {
         notificacao = db.consultaNotificacao(id);
         textViewTitulo.setText(titulo_edit);
+
         textViewDescricao.setText(descricao_edit);
         textViewData.setText(dataDaAvaliacao);
         textViewHora.setText(horaDaAvaliacao);
         textViewDataNotificacao.setText(notificacao.getData());
         textViewHoraNotificacao.setText(notificacao.getHora());
-        if(notificacao.getTipoNotifi() == 1){
+        if (notificacao.getTipoNotifi() == 1) {
             luminoso.setChecked(true);
-        }else if (notificacao.getTipoNotifi() == 2){
+        } else if (notificacao.getTipoNotifi() == 2) {
             sonoro.setChecked(true);
-        }else if(notificacao.getTipoNotifi() == 3){
+        } else if (notificacao.getTipoNotifi() == 3) {
             mensagem.setChecked(true);
             textoMensagem.setText(notificacao.getMenssagem());
         }
@@ -105,35 +109,35 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
 
-        if(v==textViewData){
-            final Calendar c= Calendar.getInstance();
-            dia=c.get(Calendar.DAY_OF_MONTH);
-            mes=c.get(Calendar.MONTH);
-            ano=c.get(Calendar.YEAR);
+        if (v == textViewData) {
+            final Calendar c = Calendar.getInstance();
+            dia = c.get(Calendar.DAY_OF_MONTH);
+            mes = c.get(Calendar.MONTH);
+            ano = c.get(Calendar.YEAR);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    textViewData.setText(dayOfMonth+"/"+(monthOfYear+1)+"/"+year);
+                    textViewData.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                 }
             }
-                    ,dia,mes,ano);
+                    , dia, mes, ano);
             datePickerDialog.show();
         }
-        if (v==textViewHora){
-            final Calendar c= Calendar.getInstance();
-            hora=c.get(Calendar.HOUR_OF_DAY);
-            minutos=c.get(Calendar.MINUTE);
+        if (v == textViewHora) {
+            final Calendar c = Calendar.getInstance();
+            hora = c.get(Calendar.HOUR_OF_DAY);
+            minutos = c.get(Calendar.MINUTE);
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    textViewHora.setText(hourOfDay+":"+minute);
+                    textViewHora.setText(hourOfDay + ":" + minute);
                 }
-            },hora,minutos,false);
+            }, hora, minutos, false);
             timePickerDialog.show();
         }
-        if(v==textViewDataNotificacao){
+        if (v == textViewDataNotificacao) {
             final Calendar c = Calendar.getInstance();
             dia = c.get(Calendar.DAY_OF_MONTH);
             mes = c.get(Calendar.MONTH);
@@ -149,7 +153,7 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
             datePickerDialog.show();
 
         }
-        if(v== textViewHoraNotificacao){
+        if (v == textViewHoraNotificacao) {
             final Calendar c = Calendar.getInstance();
             hora = c.get(Calendar.HOUR_OF_DAY);
             minutos = c.get(Calendar.MINUTE);
@@ -163,8 +167,9 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
             timePickerDialog.show();
 
         }
-        if(v==salvar){
+        if (v == salvar) {
             textViewTitulo = findViewById(R.id.titulo_editar);
+            Log.i("info", "onClick: " + textViewTitulo.getText().toString());
             textViewDescricao = findViewById(R.id.descricao_editar);
             textViewData = findViewById(R.id.viewData_editar);
             textViewHora = findViewById(R.id.viewHora_editar);
@@ -175,18 +180,23 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
             mensagem = findViewById(R.id.switch_mensagem_editar);
             textoMensagem = findViewById(R.id.mensagem_notificacao_editar);
 
+
+            avaliacao = new Avaliacao();
+            avaliacao.setId(id);
             avaliacao.setTitulo(textViewTitulo.getText().toString());
             avaliacao.setDescricao(textViewDescricao.getText().toString());
             avaliacao.setDataDaAvaliacao(textViewData.getText().toString());
             avaliacao.setHoraDaAvaliacao(textViewHora.getText().toString());
 
+            Log.i("info", "onClick: " + notificacao.getId() + " idavalicao" + avaliacao.getId());
+
             notificacao.setData(textViewDataNotificacao.getText().toString());
             notificacao.setHora(textViewHoraNotificacao.getText().toString());
-            if(luminoso.isChecked()){
+            if (luminoso.isChecked()) {
                 notificacao.setTipoNotifi(1);
-            } else if(sonoro.isChecked()){
+            } else if (sonoro.isChecked()) {
                 notificacao.setTipoNotifi(2);
-            } else if(mensagem.isChecked()){
+            } else if (mensagem.isChecked()) {
                 notificacao.setTipoNotifi(3);
                 notificacao.setMenssagem(textoMensagem.getText().toString());
             }
@@ -200,29 +210,38 @@ public class EditarAvaliacaoActivity extends AppCompatActivity implements View.O
                 startActivity(intent);
                 finish();
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 Toast.makeText(EditarAvaliacaoActivity.this, "Não foi possível salvar", Toast.LENGTH_SHORT).show();
             }
 
         }
 
-        if(v==cancelar){
+        if (v == cancelar) {
             Intent intent = new Intent(EditarAvaliacaoActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
 
         }
 
-        if(v==deletar){
-            idNotificacao = notificacao.getId();
-            try {
-            db.deletAvaliacao(id, idNotificacao);
-                Toast.makeText(EditarAvaliacaoActivity.this, "Deletado com sucesso", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(EditarAvaliacaoActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }catch (Exception e){
-                Toast.makeText(EditarAvaliacaoActivity.this, "Não foi possível salvar", Toast.LENGTH_SHORT).show();
+        if (v == deletar) {
+
+            if (notificacao != null) {
+                idNotificacao = notificacao.getId();
+                try {
+
+
+                    db.deletAvaliacao(id, idNotificacao);
+
+                    Toast.makeText(EditarAvaliacaoActivity.this, "Deletado com sucesso", Toast.LENGTH_SHORT).show();
+                    NotificationController nController = new NotificationController(this);
+                    nController.cancelarNotificacao(notificacao);
+                    Toast.makeText(EditarAvaliacaoActivity.this, "Alarme deletado com sucesso", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(EditarAvaliacaoActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    Toast.makeText(EditarAvaliacaoActivity.this, "Não foi possível salvar", Toast.LENGTH_SHORT).show();
+                }
             }
 
         }

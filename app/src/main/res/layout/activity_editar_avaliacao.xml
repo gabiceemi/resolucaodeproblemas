@@ -45,6 +45,7 @@
             android:layout_marginEnd="8dp"
             android:backgroundTint="@android:color/transparent"
             android:hint="Insira o título"
+            android:inputType="text"
             android:textColor="@color/colorPrimaryText"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -227,7 +228,7 @@
             app:layout_constraintTop_toBottomOf="@+id/switch_luminoso_editar" />
 
         <ImageView
-            android:id="@+id/deletar_editar"
+            android:id="@+id/deleta_editar"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="35dp"

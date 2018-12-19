@@ -2,6 +2,7 @@ package br.edu.unipampa.appavaliacoes.Controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ class ListAdapterAvaliacao extends ArrayAdapter<Avaliacao> implements AdapterVie
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(context, EditarAvaliacaoActivity.class);
+        Log.i("info", "onItemClick: Teste 2");
         context.startActivity(intent);
     }
 }

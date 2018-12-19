@@ -3,9 +3,13 @@
     package="br.edu.unipampa.appavaliacoes">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
-        android:name=".Service.Channel"
         android:allowBackup="true"
         android:icon="@mipmap/ic"
         android:label="@string/app_name"
@@ -21,27 +25,47 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Service.NotificationReceiver">
 
-
-        </activity>
-        <activity android:name=".Controller.NotificationChannel">
-
-            <intent-filter>
-                <action android:name="ALARME_ATIVO"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-             </intent-filter>
-        </activity>
         <activity
             android:name=".Controller.AdicionarAvaliacaoActivity"
             android:label="Adicionar Avaliação" />
-        <activity android:name=".Controller.AdiarNotificacao" />
+
         <activity
             android:name=".Controller.EditarAvaliacaoActivity"
             android:label="Editar Avaliação" />
 
-        <service android:name=".Service.NotificationService"/>
+          <service
+            android:name=".Service.NotificationReceiver"
+            android:label="Word service"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.REBOOT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".Service.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.intent.action.REBOOT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+
+
+
+
     </application>
+
+
 
 
 </manifest>

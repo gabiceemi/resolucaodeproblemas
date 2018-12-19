@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -177,6 +178,8 @@ public class DataBasePersistencia {
         db = avaliacaoHelper.getReadableDatabase();
 
         Cursor c = db.rawQuery("SELECT * FROM Notificacao WHERE Notificacao.datanotificacao >=" + data+" ORDER by Notificacao.datanotificacao,Notificacao.horarionotificacao", null);
+
+        Log.i("Info", "consultaNotifition: " + data);
 
         if (c.moveToFirst()) {
             do {
