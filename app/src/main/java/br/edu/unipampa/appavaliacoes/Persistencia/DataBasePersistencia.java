@@ -146,23 +146,12 @@ public class DataBasePersistencia {
         }
     }
 
-    public void updateAdiarNotification(int id, String data, String hora, int tipoNotifcacao){
 
-        try{}catch (Exception e){
-            db = avaliacaoHelper.getWritableDatabase();
+    /**
+     * Alterar consulta para data e hora maior que hora atual do sistema
+     * @return
+     */
 
-            ContentValues values = new ContentValues();
-
-            values.put(DataBaseContract.Notificacao.COLUNA_DATA_NOTIFICACAO,data);
-            values.put(DataBaseContract.Notificacao.COLUNA_HORARIO_NOTIFICACAO, hora);
-
-            values.put(DataBaseContract.Notificacao.COLUNA_TIPO_NOTIFICACAO, tipoNotifcacao);
-            db.update(DataBaseContract.Notificacao.NOME_TABELA, values, "_id = ?", new String[]{String.valueOf(id)});
-
-            db.close();
-
-        }
-    }
 
 
     public ArrayList<Notificacao> consultaNotifition(){
@@ -170,6 +159,7 @@ public class DataBasePersistencia {
 
         Calendar hoje = Calendar.getInstance();
         String data =  hoje.get(hoje.DAY_OF_MONTH)+"/"+ hoje.get(hoje.MONTH)+ "/"+hoje.get(hoje.YEAR);
+        String hora = hoje.get(hoje.HOUR_OF_DAY)+":"+hoje.get(hoje.MINUTE);
 
 
         ArrayList<Notificacao> notifi = new ArrayList<>();
@@ -177,7 +167,7 @@ public class DataBasePersistencia {
 
         db = avaliacaoHelper.getReadableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM Notificacao WHERE Notificacao.datanotificacao >=" + data+" ORDER by Notificacao.datanotificacao,Notificacao.horarionotificacao", null);
+        Cursor c = db.rawQuery("SELECT * FROM Notificacao WHERE Notificacao.datanotificacao >=" + data+ " and Notificacao.horarionotificacao >" + hora + "    ORDER by Notificacao.datanotificacao,Notificacao.horarionotificacao", null);
 
         Log.i("Info", "consultaNotifition: " + data);
 
